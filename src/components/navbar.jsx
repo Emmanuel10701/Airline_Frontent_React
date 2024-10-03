@@ -1,12 +1,23 @@
 // src/components/Navbar.js
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation for routing
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation(); // Get the current location
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Define your nav items
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Login', path: '/login' },
+    { name: 'Register', path: '/register' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
 
   return (
     <nav className="fixed w-full bg-gray-100 shadow-md z-10">
@@ -16,21 +27,19 @@ const Navbar = () => {
           {isOpen ? 'Close' : 'Menu'}
         </button>
         <ul className={`md:flex space-x-4 absolute md:static bg-gray-100 md:bg-transparent transition-transform duration-300 ${isOpen ? 'top-12 left-0 w-full' : '-top-40'}`}>
-          <li>
-            <a href="#header" className="block py-2 px-4 hover:bg-purple-600 hover:text-white transition duration-300">Home</a>
-          </li>
-          <li>
-            <a href="#steps" className="block py-2 px-4 hover:bg-purple-600 hover:text-white transition duration-300">Steps</a>
-          </li>
-          <li>
-            <a href="#explore" className="block py-2 px-4 hover:bg-purple-600 hover:text-white transition duration-300">Explore</a>
-          </li>
-          <li>
-            <a href="#jobs" className="block py-2 px-4 hover:bg-purple-600 hover:text-white transition duration-300">Jobs</a>
-          </li>
-          <li>
-            <a href="#offers" className="block py-2 px-4 hover:bg-purple-600 hover:text-white transition duration-300">Offers</a>
-          </li>
+          {navItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                to={item.path}
+                className={`block py-2 px-4 transition duration-300 relative ${location.pathname === item.path ? 'text-blue-500 font-bold' : 'text-gray-800 hover:text-blue-500'}`}
+              >
+                {item.name}
+                {location.pathname === item.path && (
+                  <hr className="absolute bottom-0 left-0 right-0 border-blue-500 transition duration-300" />
+                )}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
