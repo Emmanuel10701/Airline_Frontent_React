@@ -1,23 +1,15 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import Navbar from './components/navbar';
+import MainContent from './components/homepage';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <div className="app">
-      <div className="logo-container">
-        <img src={reactLogo} className="logo" alt="React logo" />
-        <img src={viteLogo} className="logo" alt="Vite logo" />
-      </div>
-      <h1>Hello, World!</h1>
-      <button onClick={() => setCount(count + 1)}>
-        Count is: {count}
-      </button>
+    <div>
+      <Navbar />
+      <MainContent />
     </div>
   );
-}
+};
 
 export default App;
