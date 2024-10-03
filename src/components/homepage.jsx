@@ -1,11 +1,11 @@
 // src/MyPage.jsx
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from './navbar';
 import { Link } from 'react-router-dom';
 import stepsBg from '../assets/assets/steps-bg.png'; // Background image
 import icon from '../assets/assets/steps-bg.png'; // Icon image for tagline
 import jobIcon from '../assets/assets/steps-bg.png'; // Job icon
-import heroImage from '../assets/assets/hero.jpeg'; // Add your hero image here
 
 const MyPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,26 +16,56 @@ const MyPage = () => {
           <Navbar/>
       {/* Header Section */}
       <header className="relative text-center py-16 bg-purple-50">
-        <h2 className="inline-flex items-center justify-center gap-2 px-4 py-2 mb-4 text-orange-500 bg-orange-100 rounded-full">
-          <img src={icon} alt="icon" className="w-6 h-6" />
-          Tagline
-        </h2>
-        <h1 className="mb-4 text-5xl font-bold text-gray-900">
-          Main Title <span className="text-purple-600">Highlight</span>
-        </h1>
-        <p className="mb-8 max-w-lg mx-auto text-gray-500 leading-relaxed">
-          This is a detailed description highlighting the core information about our services.
-        </p>
-        <img src={heroImage} alt="Hero" className="w-full h-auto max-w-lg mx-auto mb-8" />
-        <div className="flex justify-center gap-4">
-          <Link to="/post-job" className="px-8 py-3 font-medium text-white bg-purple-600 rounded-full hover:bg-purple-700 transition duration-300">
-            Post Job
-          </Link>
-          <Link to="/find-job" className="px-8 py-3 font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300">
-            Find Job
-          </Link>
-        </div>
-      </header>
+      {/* Tagline Section with Fade Animation */}
+      <motion.h2
+        className="inline-flex items-center justify-center gap-2 px-4 py-2 mb-4 text-orange-500 bg-orange-100 rounded-full"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <img src={icon} alt="icon" className="w-6 h-6" />
+        Find Your Dream Job Today!
+      </motion.h2>
+
+      {/* Main Title with Slide-In Animation */}
+      <motion.h1
+        className="mb-4 text-5xl font-bold text-gray-900"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        Discover Your Perfect <span className="text-purple-600">Career</span> Match
+      </motion.h1>
+
+      {/* Description Section with Fade Animation */}
+      <motion.p
+        className="mb-8 max-w-xl mx-auto text-gray-500 leading-relaxed"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7 }}
+      >
+        Join thousands of professionals finding the perfect role tailored to their skills and aspirations. Whether you're looking to kick-start your career or advance in your field, our platform connects you with top companies across industries.
+      </motion.p>
+
+      {/* Call to Action Buttons with Bounce Animation */}
+      <motion.div
+        className="flex justify-center gap-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, scale: [1, 1.05, 1] }}
+        transition={{ duration: 0.8 }}
+      >
+        <Link to="/post-job">
+          <button className="px-8 py-3 font-medium text-white bg-purple-600 rounded-full hover:bg-purple-700 transition duration-300">
+            Post a Job
+          </button>
+        </Link>
+        <Link to="/find-job">
+          <button className="px-8 py-3 font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300">
+            Find a Job
+          </button>
+        </Link>
+      </motion.div>
+    </header>
 
       {/* Steps Section */}
       <section className="bg-cover bg-center py-16" style={{ backgroundImage: `url(${stepsBg})` }}>
