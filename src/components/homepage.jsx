@@ -10,6 +10,32 @@ import jobIcon from '../assets/assets/steps-bg.png'; // Job icon
 const MyPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+
+
+
+const stepsData = [
+  {
+    title: 'Prepare Your Resume',
+    description: 'Craft a compelling resume that highlights your skills and experiences.',
+    colorClass: 'bg-orange-100 text-orange-500'
+  },
+  {
+    title: 'Research the Company',
+    description: 'Understand the company culture and job requirements to tailor your application.',
+    colorClass: 'bg-purple-100 text-purple-600'
+  },
+  {
+    title: 'Submit Your Application',
+    description: 'Follow the application instructions carefully to ensure your submission is complete.',
+    colorClass: 'bg-green-100 text-green-600'
+  },
+  {
+    title: 'Prepare for Interviews',
+    description: 'Practice common interview questions and research the role to impress your interviewer.',
+    colorClass: 'bg-red-100 text-red-600'
+  },
+];
+
   return (
     <div className="font-poppins">
       {/* Navigation */}
@@ -67,22 +93,30 @@ const MyPage = () => {
       </motion.div>
     </header>
 
-      {/* Steps Section */}
-      <section className="bg-cover bg-center py-16" style={{ backgroundImage: `url(${stepsBg})` }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Array.from({ length: 4 }, (_, index) => (
-              <div key={index} className="p-4 bg-white shadow-lg rounded-lg transition-transform duration-500 transform hover:scale-105">
-                <span className={`block mb-4 px-3 py-2 rounded-full text-2xl ${['bg-orange-100 text-orange-500', 'bg-purple-100 text-purple-600', 'bg-green-100 text-green-600', 'bg-red-100 text-red-600'][index]}`}>
-                  {index + 1}
-                </span>
-                <h4 className="mb-2 text-lg font-bold text-gray-900">Step {index + 1}</h4>
-                <p className="text-gray-500">Description of step {index + 1} to guide users through the process.</p>
-              </div>
-            ))}
-          </div>
+    <section
+      className="bg-cover bg-center py-16"
+      style={{ backgroundImage: `url(${stepsBg})` }}
+    >
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+          How to Apply for a Job
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stepsData.map((step, index) => (
+            <div
+              key={index}
+              className={`p-6 bg-white shadow-lg rounded-lg transition-transform duration-500 transform hover:scale-105`}
+            >
+              <span className={`block mb-4 px-4 py-2 rounded-full text-2xl ${step.colorClass}`}>
+                {index + 1}
+              </span>
+              <h4 className="mb-2 text-lg font-bold text-gray-900">{step.title}</h4>
+              <p className="text-gray-500">{step.description}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Explore Section */}
       <section className="py-16">
