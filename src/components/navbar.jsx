@@ -1,6 +1,8 @@
+// src/components/Navbar.jsx
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiMenu, FiX } from 'react-icons/fi'; // Importing the icons
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,13 +15,13 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Login', path: '/login' },
-    { name: 'Register', path: '/register' },
+    { name: 'Register', path: '/account-selection' }, // Change path to the account selection page
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
 
   return (
-    <nav className="fixed w-full bg-gray-100 shadow-md z-10">
+    <nav className="fixed top-0 left-0 w-full bg-gray-100 shadow-md z-10">
       <div className="max-w-6xl mx-auto p-4 flex justify-between items-center">
         <div className="text-purple-600 text-2xl font-bold">MyLogo</div>
         <button onClick={toggleMenu} className="text-gray-800 md:hidden focus:outline-none">
