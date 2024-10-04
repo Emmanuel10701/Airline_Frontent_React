@@ -8,10 +8,7 @@ import { FaGoogle, FaTwitter } from 'react-icons/fa'; // Import Google and Twitt
 import backgroundImage from '../assets/assets/winter.jpg';
 
 const Login = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -26,7 +23,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await fetch("http://your-django-api/login/", {
+            const response = await fetch("http://127.0.0.1:8000/api/auth/login/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,12 +32,14 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const { token } = await response.json();
-                localStorage.setItem('jwtToken', token);
+                const { access, refresh } = await response.json();
+                localStorage.setItem('accessToken', access);
+                localStorage.setItem('refreshToken', refresh);
                 toast.success("Login successful!");
                 navigate('/dashboard'); // Redirect to dashboard or home page
             } else {
-                toast.error("Login failed. Please check your credentials.");
+                const errorData = await response.json();
+                toast.error(errorData.detail || "Login failed. Please check your credentials.");
             }
         } catch (error) {
             toast.error("An error occurred. Please try again.");
@@ -51,13 +50,11 @@ const Login = () => {
     };
 
     const handleForgotPassword = () => {
-        // Redirect to the forgot password page
-        navigate('/forgot-password');
+        navigate('/forgot-password'); // Redirect to the forgot password page
     };
 
     const handleSocialLogin = (provider) => {
-        // Redirect to your social login API
-        window.location.href = `http://your-django-api/auth/${provider}/`;
+        window.location.href = `http://your-django-api/auth/${provider}/`; // Replace with actual URL
     };
 
     return (
@@ -86,7 +83,7 @@ const Login = () => {
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6 px-3" // Increased font size
+                                className="mt-2 block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6 px-3"
                             />
                         </div>
 
@@ -102,14 +99,14 @@ const Login = () => {
                                     required
                                     value={formData.password}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6 px-3" // Increased font size
+                                    className="block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6 px-3"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xl" // Increased icon size
+                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xl"
                                 >
-                                    {showPassword ? <AiFillEyeInvisible size={24} /> : <AiFillEye size={24} />} {/* Increased icon size */}
+                                    {showPassword ? <AiFillEyeInvisible size={24} /> : <AiFillEye size={24} />}
                                 </button>
                             </div>
                         </div>

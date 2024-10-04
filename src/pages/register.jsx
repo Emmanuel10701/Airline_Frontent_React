@@ -46,7 +46,7 @@ const Register = () => {
         const dataToSend = { ...formData };
 
         try {
-            const response = await fetch("http://your-django-api/register/", {
+            const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -58,6 +58,7 @@ const Register = () => {
                 const { token } = await response.json();
                 localStorage.setItem('jwtToken', token);
                 toast.success("Registration successful!");
+                alert("Registration successful!");
                 navigate('/login');
             } else {
                 toast.error("Registration failed. Please try again.");
