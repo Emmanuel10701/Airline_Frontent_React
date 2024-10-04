@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import Navbar from './navbar';
 import { Link } from 'react-router-dom';
 import stepsBg from '../assets/assets/steps-bg.png'; // Background image
+import heroimage from '../assets/assets/job.png'; // Background image
 import icon from '../assets/assets/steps-bg.png'; // Icon image for tagline
 import jobIcon from '../assets/assets/steps-bg.png'; // Job icon
 
 const MyPage = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
 
 
 
@@ -40,9 +40,9 @@ const stepsData = [
     <div className="font-poppins">
       {/* Navigation */}
           <Navbar/>
-      {/* Header Section */}
-      <header className="relative text-center py-16 bg-purple-50">
-      {/* Tagline Section with Fade Animation */}
+          <header className="relative text-center py-16 bg-purple-50">
+  <div className="mx-4 md:mx-40 mt-20 flex flex-col-reverse md:flex-row items-center">
+    <div className="md:w-1/2">
       <motion.h2
         className="inline-flex items-center justify-center gap-2 px-4 py-2 mb-4 text-orange-500 bg-orange-100 rounded-full"
         initial={{ opacity: 0, y: -20 }}
@@ -53,7 +53,6 @@ const stepsData = [
         Find Your Dream Job Today!
       </motion.h2>
 
-      {/* Main Title with Slide-In Animation */}
       <motion.h1
         className="mb-4 text-5xl font-bold text-gray-900"
         initial={{ opacity: 0, x: -50 }}
@@ -63,7 +62,6 @@ const stepsData = [
         Discover Your Perfect <span className="text-purple-600">Career</span> Match
       </motion.h1>
 
-      {/* Description Section with Fade Animation */}
       <motion.p
         className="mb-8 max-w-xl mx-auto text-gray-500 leading-relaxed"
         initial={{ opacity: 0 }}
@@ -73,7 +71,6 @@ const stepsData = [
         Join thousands of professionals finding the perfect role tailored to their skills and aspirations. Whether you're looking to kick-start your career or advance in your field, our platform connects you with top companies across industries.
       </motion.p>
 
-      {/* Call to Action Buttons with Bounce Animation */}
       <motion.div
         className="flex justify-center gap-4"
         initial={{ opacity: 0 }}
@@ -91,7 +88,14 @@ const stepsData = [
           </button>
         </Link>
       </motion.div>
-    </header>
+    </div>
+
+    <div className="md:w-1/2">
+      <img src={heroimage} alt="heroimage" className="w-full h-auto" />
+    </div>
+  </div>
+</header>
+
 
     <section
       className="bg-cover bg-center py-16"
