@@ -3,7 +3,7 @@ import { FaInstagram, FaLinkedin, FaFacebook, FaTwitter } from 'react-icons/fa';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast notifications
+import 'react-toastify/dist/ReactToastify.css';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ const Footer = () => {
       });
 
       if (response.ok) {
-        setEmail(''); // Reset the email field after subscription
+        setEmail('');
         toast.success('Subscribed successfully!');
       } else {
         const errorData = await response.json();
@@ -37,9 +37,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-800 text-gray-100 py-8">
-      <div className="max-w-7xl w-1/2 mx-auto px-4">
-        <div className="flex justify-center space-x-6 mb-6">
+    <footer className="bg-gray-800 text-gray-100 py-8 ">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-center space-x-6 mb-6 flex-wrap">
           <Link to="#">
             <FaInstagram className="text-pink-500 w-6 h-6 hover:text-pink-400 transition-colors duration-300" />
           </Link>
@@ -58,19 +58,18 @@ const Footer = () => {
           <h4 className="text-lg font-bold mb-2">Subscribe to our Newsletter</h4>
           <p className="text-sm text-gray-400 mb-4">Stay updated with the latest job postings and career advice</p>
 
-          <form onSubmit={handleSubscription} className="flex justify-center space-x-2">
+          <form onSubmit={handleSubscription} className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
             <input
               type="email"
-              className="px-10 text-lg font-semibold py-3 w-[75%] text-gray-900 rounded-lg focus:outline-none"
+              className="px-4 py-3 w-1/3 text-gray-900 rounded-lg focus:outline-none"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-
             <button
               type="submit"
-              className="flex items-center justify-center px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition duration-300"
+              className="flex items-center justify-center px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition duration-300 w-full sm:w-auto"
               disabled={loading}
             >
               {loading ? (

@@ -15,25 +15,44 @@ const JobPostingForm = () => {
         description: '',
         requirements: '',
         salary: '',
-        logo: null,
+        logo: null, // Keep as null for file handling
         work_type: '',
         work_details: '',
-        user: 1,
+        user: 1, // This should be set to the logged-in user's ID
     });
     const [loading, setLoading] = useState(false);
+    const [logoPreview, setLogoPreview] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const handleFileChange = (e) => {
-        setFormData((prevData) => ({ ...prevData, logo: e.target.files[0] }));
+    const handleLogoUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setLogoPreview(reader.result);
+                setFormData((prevData) => ({ ...prevData, logo: file })); // Store the file
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setFormData((prevData) => ({ ...prevData, logo: null }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+
+        // Basic validation
+        const { job_title, company_name, email, mobile, location, description, requirements, salary, work_type, work_details, logo } = formData;
+        if (!job_title || !company_name || !email || !mobile || !location || !description || !requirements || !salary || !work_type || !work_details || !logo) {
+            toast.error("Please fill in all required fields.");
+            setLoading(false);
+            return;
+        }
 
         const formDataToSend = new FormData();
         Object.keys(formData).forEach((key) => {
@@ -62,6 +81,7 @@ const JobPostingForm = () => {
                     work_details: '',
                     user: 1,
                 });
+                setLogoPreview(null);
             } else {
                 toast.error("Failed to post job. Please try again.");
             }
@@ -88,6 +108,7 @@ const JobPostingForm = () => {
             work_details: '',
             user: 1,
         });
+        setLogoPreview(null);
     };
 
     return (
@@ -96,14 +117,41 @@ const JobPostingForm = () => {
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
             <div className="bg-black opacity-60"></div>
-            <div className="flex min-h-full mt-20 mb-20 flex-col justify-center items-center w-[66%] mx-auto ">
-                <div className="mt-10 w-full bg-slate-400 rounded-xl shadow-lg p-8 backdrop-blur-lg">
+            <div className="flex min-h-full mt-20 mb-20 mx-4 flex-col justify-center items-center md:w-[66%] w-full md:mx-auto">
+                <div className="mt-10 w-full bg-slate-200 rounded-xl shadow-lg p-8 backdrop-blur-lg">
                     <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-6">
                         Post a Job
                     </h1>
 
                     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Left Column */}
+                        {/* Logo Upload */}
+                        <div className="flex flex-col items-center mb-4">
+                            <label className="block text-lg font-semibold text-gray-900">
+                                Upload Logo
+                            </label>
+                            <div className="mt-2">
+                                <label className="flex items-center justify-center w-20 h-20 rounded-full border-2 border-gray-300 cursor-pointer hover:shadow-lg transition">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleLogoUpload}
+                                        className="hidden"
+                                    />
+                                    {logoPreview ? (
+                                        <img
+                                            src={logoPreview}
+                                            alt="Logo Preview"
+                                            className="w-full h-full rounded-full object-cover"
+                                        />
+                                    ) : (
+                                        <span className="text-gray-500 text-2xl">+</span>
+                                    )}
+                                </label>
+                                <span className="text-gray-500 mt-1">Click to upload logo</span>
+                            </div>
+                        </div>
+
+                        {/* Input Fields */}
                         <div>
                             <label htmlFor="job_title" className="block text-lg font-semibold text-gray-900">
                                 <FaBuilding size={20} className="inline-block mr-2 text-blue-500" /> Job Title
@@ -190,7 +238,7 @@ const JobPostingForm = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                                rows={3} // Set rows for uniform height
+                                rows={3}
                             />
                         </div>
 
@@ -205,7 +253,7 @@ const JobPostingForm = () => {
                                 value={formData.requirements}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                                rows={3} // Set rows for uniform height
+                                rows={3}
                             />
                         </div>
 
@@ -237,11 +285,11 @@ const JobPostingForm = () => {
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                             >
                                 <option value="">Select work type</option>
-                                <option value="fixed">Fixed</option>
-                                <option value="hourly">Hourly</option>
+                                <option value="remote">Remote</option>
+                                <option value="site">Site</option>
                                 <option value="contract">Contract</option>
                                 <option value="temporary">Temporary</option>
-                                <option value="freelance">Freelance</option>
+                                <option value="permanent">Permanent</option>
                             </select>
                         </div>
 
@@ -256,36 +304,22 @@ const JobPostingForm = () => {
                                 value={formData.work_details}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                                rows={3} // Set rows for uniform height
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="logo" className="block text-lg font-semibold text-gray-900">
-                                Company Logo
-                            </label>
-                            <input
-                                id="logo"
-                                name="logo"
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                rows={3}
                             />
                         </div>
 
                         {/* Buttons */}
-                        <div className="flex justify-between mt-4 md:mt-6">
+                        <div className="flex justify-between gap-2 mt-2 md:mt-6">
                             <button
                                 type="button"
                                 onClick={handleCancel}
-                                className="flex-1 px-4 py-2 font-bold text-white bg-transparent border-2 border-red-600 rounded-full hover:bg-red-600 transition"
+                                className="flex-1 py-1 px-4 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
-                                className={`flex-1 px-4 py-2 font-bold text-white bg-transparent border-2 border-blue-600 rounded-full hover:bg-blue-600 transition ${loading && 'opacity-50 cursor-not-allowed'}`}
+                                className={`flex-1 py-1 px-4 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition ${loading && 'opacity-50 cursor-not-allowed'}`}
                                 disabled={loading}
                             >
                                 {loading ? <CircularProgress size={24} /> : "Submit"}
