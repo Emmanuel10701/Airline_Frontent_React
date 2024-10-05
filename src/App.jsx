@@ -9,6 +9,7 @@ import AccountSelection from './components/account'; // Import the AccountSelect
 import Contact from '../src/pages/contact'; // Import the Contact component
 import Register from '../src/pages/register'; // Import the Contact component
 import Login from '../src/pages/login'; // Import the Contact component
+import Jobsform from '../src/pages/jobsform'; // Import the Contact component
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} /> {/* Add the Contact page route */}
                 <Route path="/register" element={<Register />} /> {/* Add the Contact page route */}
                 <Route path="/login" element={<Login />} /> {/* Add the Contact page route */}
+                <Route path="/jobsform" element={<Jobsform />} /> {/* Add the Contact page route */}
                 <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
             </Routes>
             <Footer />

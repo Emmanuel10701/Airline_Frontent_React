@@ -38,7 +38,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-800 text-gray-100 py-8">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl w-1/2 mx-auto px-4">
         <div className="flex justify-center space-x-6 mb-6">
           <Link to="#">
             <FaInstagram className="text-pink-500 w-6 h-6 hover:text-pink-400 transition-colors duration-300" />
@@ -61,7 +61,7 @@ const Footer = () => {
           <form onSubmit={handleSubscription} className="flex justify-center space-x-2">
             <input
               type="email"
-              className="px-4 py-2 text-gray-900 rounded-lg focus:outline-none"
+              className="px-10 text-lg font-semibold py-3 w-[75%] text-gray-900 rounded-lg focus:outline-none"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

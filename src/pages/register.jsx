@@ -1,4 +1,3 @@
-// src/components/Register.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -83,15 +82,21 @@ const Register = () => {
         >
             <div className="absolute inset-0 bg-black opacity-50"></div>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-               
-
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md bg-white rounded-lg shadow-lg p-6 backdrop-blur-lg">
+                    <div className="flex justify-between mb-4">
+                        <button
+                            onClick={() => navigate('/account-selection')}
+                            className="text-indigo-600 hover:text-indigo-500 hover:text-underline"
+                        >
+                            Change Registration Type
+                        </button>
+                    </div>
                     <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent mb-6">
-                        Register as {formData.role === 'client' ? 'Client' : 'Freelancer'}
-                    </h1>
-                </div>
+                        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                            <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent mb-6">
+                                Register as {formData.role === 'client' ? 'Client' : 'Freelancer'}
+                            </h1>
+                        </div>
                         <div>
                             <label htmlFor="username" className="block text-lg font-bold leading-6 text-gray-900">
                                 Username
@@ -103,7 +108,7 @@ const Register = () => {
                                 required
                                 value={formData.username}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
+                                className="mt-2 block w-full rounded-md border-0 py-3 px-6 text-lg font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                             />
                         </div>
 
@@ -118,7 +123,7 @@ const Register = () => {
                                 required
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
+                                className="mt-2 block w-full rounded-md border-0 py-3 px-6 text-lg font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                             />
                         </div>
 
@@ -134,12 +139,12 @@ const Register = () => {
                                     required
                                     value={formData.password}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
+                                    className="block w-full rounded-md border-0 py-3 px-6 text-lg font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl"
                                 >
                                     {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
                                 </button>
@@ -158,12 +163,12 @@ const Register = () => {
                                     required
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
+                                    className="block w-full rounded-md border-0 py-3 px-6 text-lg font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl"
                                 >
                                     {showConfirmPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
                                 </button>
