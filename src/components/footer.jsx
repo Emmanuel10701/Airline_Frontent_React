@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
 import { FaInstagram, FaLinkedin, FaFacebook, FaTwitter } from 'react-icons/fa';
-import CircularProgress from '@mui/material/CircularProgress'; // Ensure correct import
+import CircularProgress from '@mui/material/CircularProgress';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast notifications
 
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubscription = (e) => {
+  const handleSubscription = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate async API call
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/subscribe/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setEmail(''); // Reset the email field after subscription
+        toast.success('Subscribed successfully!');
+      } else {
+        const errorData = await response.json();
+        toast.error(`Subscription failed: ${errorData.email[0]}`);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again later.');
+    } finally {
       setLoading(false);
-      setEmail(''); // Reset the email field after subscription
-      alert('Subscribed successfully!');
-    }, 2000);
+    }
   };
 
   return (
@@ -72,6 +89,16 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} Your Company. All rights reserved.
         </div>
       </div>
+
+      <ToastContainer 
+        position="top-center" 
+        autoClose={5000} 
+        hideProgressBar={false} 
+        closeOnClick 
+        pauseOnHover 
+        draggable 
+        pauseOnFocusLoss 
+      />
     </footer>
   );
 };
