@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CircularProgress } from '@mui/material';
-import { MdEmail, MdPhone, MdBusiness } from 'react-icons/md';
+import { FaEnvelope, FaPhone, FaBuilding, FaMapMarkerAlt } from 'react-icons/fa';
 import backgroundImage from '../assets/assets/winter.jpg';
-import placeholder from '../assets/logo.webp';
 
 const JobPostingForm = () => {
     const [formData, setFormData] = useState({
-        jobTitle: '',
-        companyName: '',
+        job_title: '',
+        company_name: '',
         email: '',
+        mobile: '',
         location: '',
         description: '',
         requirements: '',
         salary: '',
         logo: null,
-        location: '',
-        workType: '',
-        workDetails: '',
+        work_type: '',
+        work_details: '',
+        user: 1,
     });
     const [loading, setLoading] = useState(false);
 
@@ -41,7 +41,7 @@ const JobPostingForm = () => {
         });
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/jobs/", {
+            const response = await fetch("http://127.0.0.1:8000/api/api/jobs/", {
                 method: "POST",
                 body: formDataToSend,
             });
@@ -49,17 +49,18 @@ const JobPostingForm = () => {
             if (response.ok) {
                 toast.success("Job posted successfully!");
                 setFormData({
-                    jobTitle: '',
-                    companyName: '',
+                    job_title: '',
+                    company_name: '',
                     email: '',
+                    mobile: '',
                     location: '',
                     description: '',
                     requirements: '',
                     salary: '',
                     logo: null,
-                    location: '',
-                    workType: '',
-                    workDetails: '',
+                    work_type: '',
+                    work_details: '',
+                    user: 1,
                 });
             } else {
                 toast.error("Failed to post job. Please try again.");
@@ -74,17 +75,18 @@ const JobPostingForm = () => {
 
     const handleCancel = () => {
         setFormData({
-            jobTitle: '',
-            companyName: '',
+            job_title: '',
+            company_name: '',
             email: '',
+            mobile: '',
             location: '',
             description: '',
             requirements: '',
             salary: '',
             logo: null,
-            location: '',
-            workType: '',
-            workDetails: '',
+            work_type: '',
+            work_details: '',
+            user: 1,
         });
     };
 
@@ -93,91 +95,90 @@ const JobPostingForm = () => {
             className="relative w-full min-h-screen flex items-center justify-center bg-cover bg-center"
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-            <div className=" bg-black opacity-60"></div>
+            <div className="bg-black opacity-60"></div>
             <div className="flex min-h-full mt-20 mb-20 flex-col justify-center items-center w-[66%] mx-auto ">
                 <div className="mt-10 w-full bg-slate-400 rounded-xl shadow-lg p-8 backdrop-blur-lg">
-                    <div className="flex justify-center mb-6">
-                        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white">
-                            {/* Placeholder for Logo */}
-                            <img src={formData.logo ? URL.createObjectURL(formData.logo) : placeholder} alt="Logo" className="w-full h-full object-cover" />
-                        </div>
-                    </div>
                     <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-6">
-                            Post a Job
-                        </h1>
+                        Post a Job
+                    </h1>
 
                     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Left Column */}
                         <div>
-                            <label htmlFor="jobTitle" className="block text-lg font-semibold text-gray-900">
-                                Job Title
+                            <label htmlFor="job_title" className="block text-lg font-semibold text-gray-900">
+                                <FaBuilding size={20} className="inline-block mr-2 text-blue-500" /> Job Title
                             </label>
                             <input
-                                id="jobTitle"
-                                name="jobTitle"
+                                id="job_title"
+                                name="job_title"
                                 type="text"
                                 required
-                                value={formData.jobTitle}
+                                value={formData.job_title}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="companyName" className="block text-lg font-semibold text-gray-900">
-                                Company Name
+                            <label htmlFor="company_name" className="block text-lg font-semibold text-gray-900">
+                                <FaBuilding size={20} className="inline-block mr-2 text-blue-500" /> Company Name
                             </label>
-                            <div className="relative mt-2">
-                                <MdBusiness className="absolute left-3 top-3 text-gray-400" />
-                                <input
-                                    id="companyName"
-                                    name="companyName"
-                                    type="text"
-                                    required
-                                    value={formData.companyName}
-                                    onChange={handleChange}
-                                    className="block w-full rounded-lg border-2 border-gray-300 py-3 pl-10 pr-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                                />
-                            </div>
+                            <input
+                                id="company_name"
+                                name="company_name"
+                                type="text"
+                                required
+                                value={formData.company_name}
+                                onChange={handleChange}
+                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                            />
                         </div>
 
                         <div>
                             <label htmlFor="email" className="block text-lg font-semibold text-gray-900">
-                                Email
+                                <FaEnvelope size={20} className="inline-block mr-2 text-blue-500" /> Email
                             </label>
-                            <div className="relative mt-2">
-                                <MdEmail className="absolute left-3 top-3 text-gray-400" />
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="block w-full rounded-lg border-2 border-gray-300 py-3 pl-10 pr-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                                />
-                            </div>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="mobile" className="block text-lg font-semibold text-gray-900">
+                                <FaPhone size={20} className="inline-block mr-2 text-blue-500" /> Mobile
+                            </label>
+                            <input
+                                id="mobile"
+                                name="mobile"
+                                type="tel"
+                                required
+                                value={formData.mobile}
+                                onChange={handleChange}
+                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                            />
                         </div>
 
                         <div>
                             <label htmlFor="location" className="block text-lg font-semibold text-gray-900">
-                                location Number
+                                <FaMapMarkerAlt size={20} className="inline-block mr-2 text-blue-500" /> Location
                             </label>
-                            <div className="relative mt-2">
-                                <MdPhone className="absolute left-3 top-3 text-gray-400" />
-                                <input
-                                    id="location"
-                                    name="location"
-                                    type="text"
-                                    required
-                                    value={formData.location}
-                                    onChange={handleChange}
-                                    className="block w-full rounded-lg border-2 border-gray-300 py-3 pl-10 pr-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                                />
-                            </div>
+                            <input
+                                id="location"
+                                name="location"
+                                type="text"
+                                required
+                                value={formData.location}
+                                onChange={handleChange}
+                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                            />
                         </div>
 
-                        {/* Right Column */}
                         <div>
                             <label htmlFor="description" className="block text-lg font-semibold text-gray-900">
                                 Job Description
@@ -189,6 +190,7 @@ const JobPostingForm = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                rows={3} // Set rows for uniform height
                             />
                         </div>
 
@@ -203,6 +205,7 @@ const JobPostingForm = () => {
                                 value={formData.requirements}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                rows={3} // Set rows for uniform height
                             />
                         </div>
 
@@ -222,45 +225,44 @@ const JobPostingForm = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="location" className="block text-lg font-semibold text-gray-900">
-                                Location
-                            </label>
-                            <select
-                                id="location"
-                                name="location"
-                                required
-                                value={formData.location}
-                                onChange={handleChange}
-                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
-                            >
-                                <option value="">Select a location</option>
-                                <option value="remote">Remote</option>
-                                <option value="onsite">On-site</option>
-                                <option value="worldwide">Worldwide</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label htmlFor="workType" className="block text-lg font-semibold text-gray-900">
+                            <label htmlFor="work_type" className="block text-lg font-semibold text-gray-900">
                                 Work Type
                             </label>
                             <select
-                                id="workType"
-                                name="workType"
+                                id="work_type"
+                                name="work_type"
                                 required
-                                value={formData.workType}
+                                value={formData.work_type}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                             >
                                 <option value="">Select work type</option>
                                 <option value="fixed">Fixed</option>
                                 <option value="hourly">Hourly</option>
+                                <option value="contract">Contract</option>
+                                <option value="temporary">Temporary</option>
+                                <option value="freelance">Freelance</option>
                             </select>
                         </div>
 
                         <div>
+                            <label htmlFor="work_details" className="block text-lg font-semibold text-gray-900">
+                                Work Details
+                            </label>
+                            <textarea
+                                id="work_details"
+                                name="work_details"
+                                required
+                                value={formData.work_details}
+                                onChange={handleChange}
+                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                rows={3} // Set rows for uniform height
+                            />
+                        </div>
+
+                        <div>
                             <label htmlFor="logo" className="block text-lg font-semibold text-gray-900">
-                                Logo (optional)
+                                Company Logo
                             </label>
                             <input
                                 id="logo"
@@ -272,19 +274,21 @@ const JobPostingForm = () => {
                             />
                         </div>
 
-                        <div className="flex justify-between md:col-span-2">
-                            <button
-                                type="submit"
-                                className="flex-1 rounded-full bg-transparent border border-indigo-600 px-3 py-2 text-lg font-semibold leading-6 text-indigo-600 shadow-md hover:bg-indigo-600 hover:text-white transition duration-300"
-                            >
-                                {loading ? <CircularProgress size={24} color="inherit" /> : "Post Job"}
-                            </button>
+                        {/* Buttons */}
+                        <div className="flex justify-between mt-4 md:mt-6">
                             <button
                                 type="button"
                                 onClick={handleCancel}
-                                className="ml-4 flex-1 rounded-full bg-transparent border border-red-600 px-3 py-2 text-lg font-semibold leading-6 text-red-600 shadow-md hover:bg-red-600 hover:text-white transition duration-300"
+                                className="flex-1 px-4 py-2 font-bold text-white bg-transparent border-2 border-red-600 rounded-full hover:bg-red-600 transition"
                             >
-                                {loading ? <CircularProgress size={24} color="inherit" /> : "Cancel"}
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                className={`flex-1 px-4 py-2 font-bold text-white bg-transparent border-2 border-blue-600 rounded-full hover:bg-blue-600 transition ${loading && 'opacity-50 cursor-not-allowed'}`}
+                                disabled={loading}
+                            >
+                                {loading ? <CircularProgress size={24} /> : "Submit"}
                             </button>
                         </div>
                     </form>
