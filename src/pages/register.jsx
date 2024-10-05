@@ -77,10 +77,10 @@ const Register = () => {
 
     return (
         <div
-            className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            className="relative min-h-screen bg-slate-100 flex items-center justify-center bg-cover bg-center"
+            
         >
-            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="absolute inset-0 bg-slate-100 "></div>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md bg-white rounded-lg shadow-lg p-6 backdrop-blur-lg">
                     <div className="flex justify-between mb-4">

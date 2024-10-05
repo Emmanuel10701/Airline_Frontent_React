@@ -4,8 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { CircularProgress } from '@mui/material';
-import { FaGoogle, FaTwitter } from 'react-icons/fa'; // Import Google and Twitter icons
-import backgroundImage from '../assets/assets/winter.jpg';
+import googleIcon from '../assets/assets/google.webp'; // Your Google icon
+import twitterIcon from '../assets/assets/twitter.png'; // Your Twitter icon
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -36,7 +36,7 @@ const Login = () => {
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
                 toast.success("Login successful!");
-                navigate('/dashboard'); // Redirect to dashboard or home page
+                navigate('/jobspost'); // Redirect to dashboard or home page
             } else {
                 const errorData = await response.json();
                 toast.error(errorData.detail || "Login failed. Please check your credentials.");
@@ -54,20 +54,16 @@ const Login = () => {
     };
 
     const handleSocialLogin = (provider) => {
-        window.location.href = `http://your-django-api/auth/${provider}/`; // Replace with actual URL
+        window.location.href = `http://127.0.0.1:8000/api/auth/${provider}/`; // Replace with your actual API URL
     };
 
     return (
-        <div
-            className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-            <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative bg-slate-100 min-h-screen flex items-center justify-center">
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md bg-white rounded-lg shadow-lg p-6 backdrop-blur-lg">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                            <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent mb-6">
+                            <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 mb-6">
                                 Login
                             </h1>
                         </div>
@@ -130,15 +126,15 @@ const Login = () => {
                     <div className="flex justify-center mt-4">
                         <button
                             onClick={() => handleSocialLogin('google')}
-                            className="flex items-center justify-center bg-red-500 text-white rounded-md px-4 py-2 mr-2 hover:bg-red-400"
+                            className="flex items-center justify-center bg-white shadow-md text-slate-500 rounded-md px-4 py-2 mr-2 hover:shandow-lg "
                         >
-                            <FaGoogle className="mr-2" /> Login with Google
+                            <img src={googleIcon} alt="Google" className="mr-2 w-5 h-5" /> Login with Google
                         </button>
                         <button
                             onClick={() => handleSocialLogin('twitter')}
-                            className="flex items-center justify-center bg-blue-400 text-white rounded-md px-4 py-2 hover:bg-blue-300"
+                            className="flex items-center justify-center bg-white shadow-md text-slate-500 rounded-md px-4 py-2 hover:shandow-lg"
                         >
-                            <FaTwitter className="mr-2" /> Login with Twitter
+                            <img src={twitterIcon} alt="Twitter" className="mr-2 w-5 h-5" /> Login with Twitter
                         </button>
                     </div>
 
