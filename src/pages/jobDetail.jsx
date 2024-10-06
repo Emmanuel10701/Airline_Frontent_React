@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import jobs from '../components/jobs'; // Assuming this is an array of job objects
 import axios from 'axios'; // Import axios for API requests
 import CircularProgress from '@mui/material/CircularProgress'; // Import Material UI spinner
+import { ToastContainer, toast } from 'react-toastify'; // Import toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
 
 const JobDetails = () => {
     const { jobId } = useParams(); // Get the jobId from the URL
@@ -15,7 +17,6 @@ const JobDetails = () => {
     const [coverLetterFileName, setCoverLetterFileName] = useState(''); // New state for the file name
     const [proposal, setProposal] = useState('');
     const [loading, setLoading] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
 
     if (!job) {
         return <div>Job not found!</div>; // Handle case where job is not found
@@ -34,14 +35,16 @@ const JobDetails = () => {
         formData.append('proposal', proposal); // Assuming this is text, adjust if necessary
 
         try {
-            const response = await axios.post('YOUR_DJANGO_API_ENDPOINT', formData, {
+            await axios.post('YOUR_DJANGO_API_ENDPOINT', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            setSuccessMessage('Application submitted successfully!');
+            toast.success('Application submitted successfully!'); // Show success notification
+            navigate(-1); // Navigate back or to another page if needed
         } catch (error) {
             console.error('Error submitting application:', error);
+            toast.error('Error submitting application. Please try again.'); // Show error notification
         } finally {
             setLoading(false); // Reset loading state
         }
@@ -54,7 +57,6 @@ const JobDetails = () => {
         setCoverLetter(null);
         setCoverLetterFileName(''); // Reset file name
         setProposal('');
-        setSuccessMessage('');
         // Navigate back to the previous page
         navigate(-1);
     };
@@ -69,6 +71,7 @@ const JobDetails = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-6 bg-gray-100 min-h-screen">
+            <ToastContainer /> {/* Add ToastContainer here */}
             <img 
                 src={job.logo} 
                 alt={`${job.companyName} logo`} 
@@ -84,12 +87,8 @@ const JobDetails = () => {
                 <p className="text-lg"><strong>Contract Type:</strong> {job.contractType}</p>
                 <p className="text-xl mt-2 mb-4"><strong>Description:</strong> <span style={{ color: 'blue' }}>{job.description}</span></p>
                 <div className="mb-4">
-                    <p>
-                        🌟 Welcome to our job listing! Here, we value talent and dedication. Our team is committed to fostering a collaborative environment where your skills can shine. 
-                    </p>
-                    <p>
-                        🚀 Join us to be part of innovative projects that make a difference. We believe in continuous growth and learning, ensuring that you have the resources to succeed.
-                    </p>
+                    <p>🌟 Welcome to our job listing! Here, we value talent and dedication.</p>
+                    <p>🚀 Join us to be part of innovative projects that make a difference.</p>
                 </div>
                 <p className="text-lg"><strong>Requirements:</strong> <span style={{ color: 'green' }}>{job.requirements}</span></p>
                 <p className="text-lg"><strong>Experience:</strong> <span style={{ color: 'orange' }}>{job.experience}</span></p>
@@ -97,7 +96,7 @@ const JobDetails = () => {
                 <p className="text-lg"><strong>Contact:</strong> 📧 {job.email} | 📞 {job.phone}</p>
 
                 <h1 className="text-2xl font-bold text-center mt-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-                Apply for this position now
+                    Apply for this position now
                 </h1>
 
                 <form onSubmit={handleSubmit} className="mt-10 w-[60%] items-center justify-center mx-auto">
@@ -152,8 +151,6 @@ const JobDetails = () => {
                         </button>
                     </div>
                 </form>
-                
-                {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
             </div>
         </div>
     );

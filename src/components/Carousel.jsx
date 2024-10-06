@@ -36,14 +36,14 @@ const Carousel = () => {
     ];
 
     return (
-        <div className="relative w-full max-w-3xl mx-auto mt-20 rounded-md overflow-hidden"> {/* Full width and rounded corners */}
+        <div className="relative md:w-[76%] w-full  mx-auto mt-20 rounded-md overflow-hidden"> {/* Full width and rounded corners */}
             <Slider {...settings}>
                 {slides.map((slide, index) => (
                     <div key={index} className="relative">
                         <img
                             src={slide.img}
                             alt={`Job ${index + 1}`}
-                            className="w-full h-48 object-cover rounded-md" // Rounded corners for images
+                            className="w-full h-72 object-cover rounded-md" // Rounded corners for images
                         />
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-lg font-bold bg-black bg-opacity-50 p-4">
                             <h3>{slide.text}</h3>
