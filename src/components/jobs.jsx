@@ -1,5 +1,6 @@
 const jobs = [
     {
+        id: 1,
         jobTitle: "Frontend Developer",
         contractType: "Permanent",
         location: "🌍 Worldwide",
@@ -14,6 +15,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 2,
         jobTitle: "Backend Developer",
         contractType: "Contract",
         location: "🇺🇸 North America",
@@ -28,6 +30,7 @@ const jobs = [
         workType: "On-site",
     },
     {
+        id: 3,
         jobTitle: "Data Scientist",
         contractType: "Temporary",
         location: "🇪🇺 Europe",
@@ -42,6 +45,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 4,
         jobTitle: "UX/UI Designer",
         contractType: "Hourly",
         location: "🇦🇺 Australia",
@@ -56,6 +60,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 5,
         jobTitle: "Project Manager",
         contractType: "Fixed",
         location: "🇿🇦 Africa",
@@ -70,6 +75,7 @@ const jobs = [
         workType: "On-site",
     },
     {
+        id: 6,
         jobTitle: "Digital Marketer",
         contractType: "Part-time",
         location: "🇧🇷 South America",
@@ -84,6 +90,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 7,
         jobTitle: "Software Engineer",
         contractType: "Internship",
         location: "🇨🇳 Asia",
@@ -98,6 +105,7 @@ const jobs = [
         workType: "On-site",
     },
     {
+        id: 8,
         jobTitle: "Cloud Engineer",
         contractType: "Permanent",
         location: "🇺🇸 North America",
@@ -112,6 +120,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 9,
         jobTitle: "Mobile App Developer",
         contractType: "Contract",
         location: "🇪🇺 Europe",
@@ -126,6 +135,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 10,
         jobTitle: "Cybersecurity Analyst",
         contractType: "Temporary",
         location: "🇦🇺 Australia",
@@ -140,6 +150,7 @@ const jobs = [
         workType: "On-site",
     },
     {
+        id: 11,
         jobTitle: "Business Analyst",
         contractType: "Fixed",
         location: "🇿🇦 Africa",
@@ -154,6 +165,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 12,
         jobTitle: "Graphic Designer",
         contractType: "Part-time",
         location: "🇧🇷 South America",
@@ -168,6 +180,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 13,
         jobTitle: "Full Stack Developer",
         contractType: "Internship",
         location: "🇨🇳 Asia",
@@ -182,6 +195,7 @@ const jobs = [
         workType: "On-site",
     },
     {
+        id: 14,
         jobTitle: "Content Writer",
         contractType: "Freelance",
         location: "🌍 Worldwide",
@@ -196,6 +210,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 15,
         jobTitle: "SEO Specialist",
         contractType: "Contract",
         location: "🇺🇸 North America",
@@ -210,6 +225,7 @@ const jobs = [
         workType: "Remote",
     },
     {
+        id: 16,
         jobTitle: "Database Administrator",
         contractType: "Permanent",
         location: "🇪🇺 Europe",
@@ -224,6 +240,7 @@ const jobs = [
         workType: "On-site",
     },
     {
+        id: 17,
         jobTitle: "Network Engineer",
         contractType: "Fixed",
         location: "🇦🇺 Australia",

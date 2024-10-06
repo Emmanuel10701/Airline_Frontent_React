@@ -11,6 +11,7 @@ import Register from '../src/pages/register'; // Import the Contact component
 import Login from '../src/pages/login'; // Import the Contact component
 import Jobsform from '../src/pages/jobsform'; // Import the Contact component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Contact component
+import JobDetail from '../src/pages/jobDetail.jsx'; // Import the Contact component
 
 const App = () => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} /> {/* Add the Contact page route */}
                 <Route path="/jobsform" element={<Jobsform />} /> {/* Add the Contact page route */}
                 <Route path="/jobslist" element={<Joblist />} /> {/* Add the Contact page route */}
+                <Route path="/jobDetail/:jobId" element={<JobDetail />} /> {/* Add the Contact page route */}
                 <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
             </Routes>
             <Footer />

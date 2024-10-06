@@ -1,5 +1,3 @@
-// src/components/Carousel.js
-
 import React from 'react';
 import Slider from 'react-slick';
 import { FaMoneyBillWave, FaBriefcase } from 'react-icons/fa'; // Importing react-icons
@@ -20,6 +18,14 @@ const Carousel = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         fade: true, // Adds a fade effect
+        customPaging: (i) => (
+            <button className="w-6 h-6 rounded-full bg-gray-400 transition duration-200 mx-2" />
+        ),
+        appendDots: (dots) => (
+            <div className="flex justify-center mt-4">
+                {dots}
+            </div>
+        ),
     };
 
     const slides = [
@@ -30,14 +36,14 @@ const Carousel = () => {
     ];
 
     return (
-        <div className="relative w-3/4 mx-auto">
+        <div className="relative w-full max-w-3xl mx-auto mt-20 rounded-md overflow-hidden"> {/* Full width and rounded corners */}
             <Slider {...settings}>
                 {slides.map((slide, index) => (
                     <div key={index} className="relative">
                         <img
                             src={slide.img}
                             alt={`Job ${index + 1}`}
-                            className="w-full h-48 object-cover rounded-lg" // Height reduced and rounded
+                            className="w-full h-48 object-cover rounded-md" // Rounded corners for images
                         />
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-lg font-bold bg-black bg-opacity-50 p-4">
                             <h3>{slide.text}</h3>
