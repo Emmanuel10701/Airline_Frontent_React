@@ -54,8 +54,10 @@ const Login = () => {
     };
 
     const handleSocialLogin = (provider) => {
-        window.location.href = `http://127.0.0.1:8000/api/auth/${provider}/`; // Replace with your actual API URL
+        window.location.href = `http://127.0.0.1:8000/auth/login/${provider}/`; // Corrected URL
     };
+    
+    
 
     return (
         <div className="relative bg-slate-100 min-h-screen flex items-center justify-center">
