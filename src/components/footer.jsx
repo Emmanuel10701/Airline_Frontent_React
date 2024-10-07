@@ -61,7 +61,7 @@ const Footer = () => {
           <form onSubmit={handleSubscription} className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
             <input
               type="email"
-              className="px-4 py-3 w-1/3 text-gray-900 rounded-lg focus:outline-none"
+              className="px-4 py-3 w-full  md:w-1/3 text-gray-900 rounded-lg focus:outline-none"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

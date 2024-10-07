@@ -13,6 +13,7 @@ import Jobsform from '../src/pages/jobsform'; // Import the Contact component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Contact component
 import JobDetail from '../src/pages/jobDetail.jsx'; // Import the Contact component
 import Profile from '../src/pages/profile.jsx'; // Import the Contact component
+import Clientdashboard from '../src/pages/clientdashboard.jsx'; // Import the Contact component
 
 const App = () => {
     return (
@@ -30,6 +31,7 @@ const App = () => {
                 <Route path="/jobsform" element={<Jobsform />} /> {/* Add the Contact page route */}
                 <Route path="/jobslist" element={<Joblist />} /> {/* Add the Contact page route */}
                 <Route path="/profile" element={<Profile />} /> {/* Add the Contact page route */}
+                <Route path="/clientdashboard" element={<Clientdashboard />} /> {/* Add the Contact page route */}
                 <Route path="/jobDetail/:jobId" element={<JobDetail />} /> {/* Add the Contact page route */}
                 <Route path="*" element={<NotFound />} /> {/* Catch-all route for 404 */}
             </Routes>
