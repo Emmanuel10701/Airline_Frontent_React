@@ -10,8 +10,8 @@ import Register from '../src/pages/register'; // Import the Register component
 import Login from '../src/pages/login'; // Import the Login component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Joblist component
 import JobDetail from '../src/pages/jobDetail.jsx'; // Import the JobDetail component
-import Profile from '../src/pages/profile.jsx'; // Import the Profile component
 import Clientdashboard from '../src/pages/clientdashboard.jsx'; // Import the Clientdashboard component
+import FreelancerDashboard from '../src/pages/freelancer.jsx'; // Import the Clientdashboard component
 
 const App = () => {
     return (
@@ -27,12 +27,13 @@ const App = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/jobslist" element={<Joblist />} />
-                <Route path="/profile" element={<Profile />} />
                 <Route path="/clientdashboard" element={<Clientdashboard />} />
+                <Route path="/freelacer" element={<FreelancerDashboard />} />
                 <Route path="/jobDetail/:jobId" element={<JobDetail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             {window.location.pathname !== '/clientdashboard' && <Footer />} {/* Render Footer except on Clientdashboard */}
+            {window.location.pathname !== '/freelacer' && <Footer />} {/* Render Footer except on Clientdashboard */}
         </Router>
     );
 };
