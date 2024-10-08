@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const dummyJobs = [
   { id: 1, title: "Software Engineer", description: "Develop web applications", applicants: 5 },
@@ -8,10 +8,10 @@ const dummyJobs = [
 ];
 
 const JobsList = () => {
-  const history = useHistory();
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   const handleJobClick = (job) => {
-    history.push(`/interview/${job.id}`, { job });
+    navigate(`/interview/${job.id}`, { state: { job } }); // Update navigation method
   };
 
   return (

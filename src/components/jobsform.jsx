@@ -3,7 +3,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CircularProgress } from '@mui/material';
 import { FaEnvelope, FaPhone, FaBuilding, FaMapMarkerAlt } from 'react-icons/fa';
-import backgroundImage from '../assets/assets/winter.jpg';
 
 const JobPostingForm = () => {
     const [formData, setFormData] = useState({
@@ -116,8 +115,7 @@ const JobPostingForm = () => {
             className="relative w-full min-h-screen bg-slate-100 flex items-center justify-center bg-cover bg-center"
              
         >
-            <div className="bg-black opacity-60"></div>
-            <div className="flex min-h-full mt-20 mb-20 mx-4 flex-col justify-center items-center md:w-[66%] w-full md:mx-auto">
+            <div className="flex min-h-full w-full mt-20 mb-20 mx-4 flex-col justify-center items-center md:w-[90%]  md:mx-auto">
                 <div className="mt-10 w-full bg-white rounded-xl shadow-lg p-8 backdrop-blur-lg">
                     <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-6">
                         Post a Job

@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaListUl, FaPlus, FaBars, FaSignOutAlt, FaTimes } from 'react-icons/fa';
 import { CircularProgress } from '@mui/material';
-import AddJobForm from '../pages/jobsform'; // Job form component
+import AddJobForm from '../components/jobsform'; // Job form component
 import ApplicantsList from '../components/aplicants'; // Component for applicants
 import JobsList from '../components/jobsD'; // Component for jobs overview
 import Interview from '../components/interview'; // Component for individual interview
@@ -44,7 +44,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full bg-white border-b border-blue-300 py-4 z-50 flex items-center justify-between">
+      <div className="fixed top-0 left-0 mt-20 w-full bg-white border-b border-blue-300 py-4 z-50 flex items-center justify-between">
         <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
           <div className="w-44 cursor-pointer flex items-center">
             <span className="ml-3 bg-white rounded-full text-blue-600 px-4 py-1 shadow-md">Admin</span>
@@ -119,7 +119,7 @@ const Dashboard = () => {
 
           {/* Render the appropriate component based on active tab */}
           {activeTab === 'jobsList' && <JobsList onJobSelect={handleJobSelect} />}
-          {activeTab === 'addJob' && <AddJobForm />}
+          {activeTab === 'addJob' && <AddJobForm className="w-full" />}
           {activeTab === 'applicantsList' && <ApplicantsList />}
           {activeTab === 'interview' && selectedJob && <Interview job={selectedJob} />} {/* New Interview component */}
         </main>

@@ -9,7 +9,6 @@ import AccountSelection from './components/account'; // Import the AccountSelect
 import Contact from '../src/pages/contact'; // Import the Contact component
 import Register from '../src/pages/register'; // Import the Contact component
 import Login from '../src/pages/login'; // Import the Contact component
-import Jobsform from '../src/pages/jobsform'; // Import the Contact component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Contact component
 import JobDetail from '../src/pages/jobDetail.jsx'; // Import the Contact component
 import Profile from '../src/pages/profile.jsx'; // Import the Contact component
@@ -28,7 +27,6 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} /> {/* Add the Contact page route */}
                 <Route path="/register" element={<Register />} /> {/* Add the Contact page route */}
                 <Route path="/login" element={<Login />} /> {/* Add the Contact page route */}
-                <Route path="/jobsform" element={<Jobsform />} /> {/* Add the Contact page route */}
                 <Route path="/jobslist" element={<Joblist />} /> {/* Add the Contact page route */}
                 <Route path="/profile" element={<Profile />} /> {/* Add the Contact page route */}
                 <Route path="/clientdashboard" element={<Clientdashboard />} /> {/* Add the Contact page route */}
