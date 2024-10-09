@@ -92,7 +92,7 @@ const Dashboard = () => {
             <h1 className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
               Client Dashboard
             </h1>
-            <button onClick={() => setSidebarOpen(false)}>
+            <button className='text-xl md:hidden bg-slate-500 rounded-ful font-bold' onClick={() => setSidebarOpen(false)}>
               <FaTimes />
             </button>
           </div>

@@ -1,54 +1,39 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
 
-const ClientsList = () => {
-  // Dummy client data
-  const clients = [
-    {
-      id: 1,
-      clientName: 'John Doe',
-      company: 'Tech Solutions',
-      dateHired: '2024-05-10',
-    },
-    {
-      id: 2,
-      clientName: 'Jane Smith',
-      company: 'InnovateX',
-      dateHired: '2023-12-01',
-    },
-    {
-      id: 3,
-      clientName: 'Michael Johnson',
-      company: 'GlobalSoft',
-      dateHired: '2024-07-20',
-    },
-  ];
+const dummyJobs = [
+  { id: 1, title: "Software Engineer", description: "Develop web applications", applicants: 5 },
+  { id: 2, title: "Product Manager", description: "Lead product development", applicants: 3 },
+  { id: 3, title: "Designer", description: "Create UI/UX designs", applicants: 7 },
+];
 
-  if (clients.length === 0) {
-    return <p className="text-gray-500 text-center">No clients available</p>;
-  }
+const JobsList = () => {
+  const navigate = useNavigate(); // Replace useHistory with useNavigate
+
+  const handleJobClick = (job) => {
+    navigate(`/interview/${job.id}`, { state: { job } }); // Use navigate with state
+  };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
-        <thead className="bg-gray-200 text-gray-700">
-          <tr>
-            <th className="py-3 px-6 text-left">Client Name</th>
-            <th className="py-3 px-6 text-left">Company</th>
-            <th className="py-3 px-6 text-left">Date Hired</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clients.map((client) => (
-            <tr key={client.id} className="border-b border-gray-200">
-              <td className="py-3 px-6">{client.clientName}</td>
-              <td className="py-3 px-6">{client.company}</td>
-              <td className="py-3 px-6 text-gray-500">{client.dateHired}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="mb-4 bg-white p-6 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-102">
+      <h2 className="text-xl font-semibold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500 mb-4">Jobs List</h2>
+      <ul>
+        {dummyJobs.map(job => (
+          <li
+            key={job.id}
+            className="flex justify-between items-center py-4 border-b border-gray-200 cursor-pointer bg-gray-50 hover:bg-gray-100 transition duration-300 rounded-lg shadow-sm"
+            onClick={() => handleJobClick(job)}
+          >
+            <div>
+              <h3 className="font-semibold text-lg text-gray-800">{job.title}</h3>
+              <p className="text-gray-600">{job.description}</p>
+            </div>
+            <span className="text-gray-500">{job.applicants} Applicants</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default ClientsList;
+export default JobsList;

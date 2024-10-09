@@ -3,8 +3,17 @@ import placeholder from "../assets/default.png"
 
 const nationalities = [
     "American", "British", "Canadian", "Australian", "Indian", "German", "French", "Italian",
-    "Japanese", "Chinese", "Brazilian", "Mexican", "South African", "Russian", "Other"
+    "Japanese", "Chinese", "Brazilian", "Mexican", "South African", "Russian", "Other",
+    "Argentinian", "Belgian", "Brazilian", "Colombian", "Dutch", "Egyptian", "Greek", 
+    "Hong Konger", "Iraqi", "Irish", "Israeli", "Malaysian", "New Zealander", "Nigerian", 
+    "Norwegian", "Pakistani", "Peruvian", "Philippine", "Portuguese", "Saudi", "Singaporean",
+    "South Korean", "Spanish", "Swedish", "Swiss", "Thai", "Turkish", "Ukrainian", "Vietnamese",
+    "Austrian", "Chilean", "Danish", "Finland", "Hungarian", "Indonesian", "Kenyan", 
+    "Kuwaiti", "Latvian", "Lithuanian", "Luxembourger", "Maltese", "Moroccan", "Qatari", 
+    "Romanian", "Serbian", "Slovak", "Slovenian", "Sri Lankan", "Tanzanian", "Tunisian", 
+    "Vietnamese", "Welsh", "Yemeni", "Zambian", "Zimbabwean"
 ];
+
 
 const skills = [
     "JavaScript", "Python", "Java", "C++", "Ruby", "Go", "HTML", "CSS", "React", "Node.js",
@@ -83,7 +92,7 @@ const JobApplicantForm = () => {
                             placeholder="Enter Full Name"
                             value={formData.fullName}
                             onChange={handleChange}
-                            className="p-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
+                            className="p-2 rounded border w-2/3 border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
                             required
                         />
                     </div>
@@ -95,7 +104,7 @@ const JobApplicantForm = () => {
                             placeholder="Enter Email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="p-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
+                            className="p-2 rounded border w-2/3 border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
                             required
                         />
                     </div>
@@ -107,7 +116,7 @@ const JobApplicantForm = () => {
                             placeholder="Enter Phone Number"
                             value={formData.phoneNumber}
                             onChange={handleChange}
-                            className="p-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
+                            className="p-2 rounded border w-2/3 border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
                             required
                         />
                     </div>
@@ -117,7 +126,7 @@ const JobApplicantForm = () => {
                             name="nationality"
                             value={formData.nationality}
                             onChange={handleChange}
-                            className="p-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
+                            className="p-2 rounded border w-2/3 border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
                             required
                         >
                             <option value="" disabled>Select Nationality</option>
@@ -134,7 +143,7 @@ const JobApplicantForm = () => {
                             placeholder="Enter Address"
                             value={formData.address}
                             onChange={handleChange}
-                            className="p-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
+                            className="p-2 rounded border w-2/3 border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
                             required
                         />
                     </div>
@@ -146,7 +155,7 @@ const JobApplicantForm = () => {
                             placeholder="Enter Your Education"
                             value={formData.education}
                             onChange={handleChange}
-                            className="p-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
+                            className="p-2 rounded border w-2/3 border-gray-400 focus:outline-none focus:border-blue-500 shadow focus:shadow-lg transition"
                             required
                         />
                     </div>
@@ -166,10 +175,22 @@ const JobApplicantForm = () => {
                         </div>
                     </div>
                     <div className="flex flex-col mb-4">
-                        <label className="text-white">Upload Resume (PDF)</label>
-                        <input type="file" name="resume" accept="application/pdf" onChange={handleChange} className="p-2 border border-gray-400 rounded" />
-                    </div>
-                    <button type="submit" className="w-full bg-green-600 text-white font-semibold py-2 rounded hover:bg-green-700 shadow-lg transition">Create Profile</button>
+    <label className="text-white">Upload Resume (PDF)</label>
+    <input
+        type="file"
+        name="resume"
+        accept="application/pdf" // Keep as is to accept PDF files only
+        onChange={handleChange}
+        className="p-2 border w-1/3 border-gray-400 rounded"
+    />
+</div>
+<button
+    type="submit"
+    className="w-40 mx-auto bg-transparent border border-green-600 text-green-600 font-semibold py-2 rounded-full hover:bg-green-600 hover:text-white shadow transition"
+>
+    Create Profile
+</button>
+
                 </form>
             </div>
         </div>

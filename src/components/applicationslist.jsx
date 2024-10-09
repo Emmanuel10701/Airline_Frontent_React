@@ -31,23 +31,23 @@ const ApplicationsList = () => {
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
-        <thead className="bg-gray-200 text-gray-700">
+    <div className="overflow-x-auto p-4">
+      <table className="min-w-full bg-white border border-gray-200 shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl">
+        <thead className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
           <tr>
-            <th className="py-3 px-6 text-left">Job Title</th>
-            <th className="py-3 px-6 text-left">Company</th>
-            <th className="py-3 px-6 text-left">Status</th>
-            <th className="py-3 px-6 text-left">Date Applied</th>
+            <th className="py-3 px-6 text-left text-sm font-medium">Job Title</th>
+            <th className="py-3 px-6 text-left text-sm font-medium">Company</th>
+            <th className="py-3 px-6 text-left text-sm font-medium">Status</th>
+            <th className="py-3 px-6 text-left text-sm font-medium">Date Applied</th>
           </tr>
         </thead>
         <tbody>
           {applications.map((application) => (
-            <tr key={application.id} className="border-b border-gray-200">
-              <td className="py-3 px-6">{application.jobTitle}</td>
-              <td className="py-3 px-6">{application.company}</td>
+            <tr key={application.id} className="border-b border-gray-200 transition-all duration-300 hover:bg-gray-100">
+              <td className="py-4 px-6 text-sm font-medium">{application.jobTitle}</td>
+              <td className="py-4 px-6 text-sm">{application.company}</td>
               <td
-                className={`py-3 px-6 font-semibold ${
+                className={`py-4 px-6 font-semibold text-sm ${
                   application.status === 'Pending'
                     ? 'text-yellow-600'
                     : application.status === 'Rejected'
@@ -57,7 +57,7 @@ const ApplicationsList = () => {
               >
                 {application.status}
               </td>
-              <td className="py-3 px-6 text-gray-500">{application.dateApplied}</td>
+              <td className="py-4 px-6 text-sm text-gray-500">{application.dateApplied}</td>
             </tr>
           ))}
         </tbody>
