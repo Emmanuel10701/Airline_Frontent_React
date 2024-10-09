@@ -4,11 +4,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { CircularProgress } from '@mui/material';
-import googleIcon from '../assets/assets/google.webp'; // Your Google icon
-import twitterIcon from '../assets/assets/twitter.png'; // Your Twitter icon
 
 const Login = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({ username: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -32,11 +30,17 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const { access, refresh } = await response.json();
+                const { access, refresh, role } = await response.json(); // Assuming the role is included in the response
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
                 toast.success("Login successful!");
-                navigate('/jobspost'); // Redirect to dashboard or home page
+
+                // Navigate based on user role
+                if (role === 'freelancer') {
+                    navigate('/freelancer'); // Redirect to freelancer dashboard
+                } else if (role === 'client') {
+                    navigate('/client-dashboard'); // Redirect to client dashboard
+                }
             } else {
                 const errorData = await response.json();
                 toast.error(errorData.detail || "Login failed. Please check your credentials.");
@@ -53,12 +57,6 @@ const Login = () => {
         navigate('/forgot-password'); // Redirect to the forgot password page
     };
 
-    const handleSocialLogin = (provider) => {
-        window.location.href = `http://127.0.0.1:8000/auth/login/${provider}/`; // Corrected URL
-    };
-    
-    
-
     return (
         <div className="relative bg-slate-100 min-h-screen flex items-center justify-center">
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -71,15 +69,15 @@ const Login = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-lg font-bold leading-6 text-gray-900">
-                                Email address
+                            <label htmlFor="username" className="block text-lg font-bold leading-6 text-gray-900">
+                                Username
                             </label>
                             <input
-                                id="email"
-                                name="email"
-                                type="email"
+                                id="username"
+                                name="username"
+                                type="text"
                                 required
-                                value={formData.email}
+                                value={formData.username}
                                 onChange={handleChange}
                                 className="mt-2 block w-full rounded-md border-0 py-4 text-lg text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6 px-3"
                             />
@@ -124,21 +122,6 @@ const Login = () => {
                             </button>
                         </div>
                     </form>
-
-                    <div className="flex justify-center mt-4">
-                        <button
-                            onClick={() => handleSocialLogin('google')}
-                            className="flex items-center justify-center bg-white shadow-md text-slate-500 rounded-md px-4 py-2 mr-2 hover:shandow-lg "
-                        >
-                            <img src={googleIcon} alt="Google" className="mr-2 w-5 h-5" /> Login with Google
-                        </button>
-                        <button
-                            onClick={() => handleSocialLogin('twitter')}
-                            className="flex items-center justify-center bg-white shadow-md text-slate-500 rounded-md px-4 py-2 hover:shandow-lg"
-                        >
-                            <img src={twitterIcon} alt="Twitter" className="mr-2 w-5 h-5" /> Login with Twitter
-                        </button>
-                    </div>
 
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Don't have an account?{' '}
