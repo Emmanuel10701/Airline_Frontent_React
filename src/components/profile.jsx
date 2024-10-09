@@ -7,7 +7,9 @@ const nationalities = [
 ];
 
 const skills = [
-    "JavaScript", "Python", "Java", "C++", "Ruby", "Go", "HTML", "CSS", "React", "Node.js"
+    "JavaScript", "Python", "Java", "C++", "Ruby", "Go", "HTML", "CSS", "React", "Node.js",
+    "MongoDB", "MySQL", "Django", "Ruby on Rails", "Flask", "Spring", "MariaDB", "PostgreSQL",
+    "DynamoDB", "Next.js 14", "TypeScript", "SaaS", "UI/UX", "Tailwind CSS", "Bootstrap"
 ];
 
 const JobApplicantForm = () => {
@@ -47,8 +49,8 @@ const JobApplicantForm = () => {
     };
 
     return (
-        <div className="flex items-center mt-72 mb-64 bg-white justify-center h-screen bg-cover bg-center" style={{ backgroundImage: "url('bg-image.jpg')" }}>
-            <div className=" w-[60%] bg-white p-8 rounded-lg shadow-2xl">
+        <div className="flex items-center mt-[36%] mb-64 bg-white justify-center h-screen bg-cover bg-center" style={{ backgroundImage: "url('bg-image.jpg')" }}>
+            <div className=" md:w-[90%] w-full bg-white p-8 rounded-lg shadow-2xl">
             <h1 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center mb-4">
                     Job Applicant Profile
                 </h1>

@@ -1,11 +1,10 @@
-// FreelancerDashboard.js
-
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaBriefcase, FaMoneyBillWave, FaUserFriends, FaBars, FaSignOutAlt, FaTimes } from 'react-icons/fa';
 import { CircularProgress } from '@mui/material';
 import ProfileForm from '../components/profile'; // Import ProfileForm component
+import ClientsList from '../components/client'; // Import ClientsList component
 import ApplicationsList from '../components/applicationslist'; // Import ApplicationsList component
 import { FaExclamationTriangle } from 'react-icons/fa';
 
@@ -20,7 +19,7 @@ const FreelancerDashboard = () => {
     phone: '',
     totalIncome: 0,
     appliedJobs: [],
-    clients: [],
+    clients: [], // Adding clients array
   });
 
   const handleTabChange = (tab) => {
@@ -100,10 +99,10 @@ const FreelancerDashboard = () => {
               <FaUserFriends className="mr-2 text-indigo-600" /> Profile
             </button>
             <button 
-              onClick={() => handleTabChange('income')}
-              className={`flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded ${activeTab === 'income' ? 'font-bold text-indigo-600' : ''}`}
+              onClick={() => handleTabChange('clients')}
+              className={`flex items-center p-2 text-gray-600 hover:bg-gray-200 rounded ${activeTab === 'clients' ? 'font-bold text-indigo-600' : ''}`}
             >
-              <FaMoneyBillWave className="mr-2 text-indigo-600" /> Total Income
+              <FaUserFriends className="mr-2 text-indigo-600" /> Clients
             </button>
           </nav>
         </aside>
@@ -117,12 +116,8 @@ const FreelancerDashboard = () => {
             Welcome to the Freelancer Dashboard       
           </h1>
 
-          {/* Card layout for income and applications */}
+          {/* Card layout for income and applications */} 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-6 mb-6">
-            <div className="p-6 hover:shadow-lg bg-white rounded-lg shadow-md w-full max-w-xs">
-              <h3 className="text-md text-center text-slate-600 font-bold">💰 Total Income</h3>
-              <p className="text-2xl font-bold text-center text-green-700">${profileData.totalIncome}</p>
-            </div>
             <div className="p-6 hover:shadow-lg bg-white rounded-lg shadow-md w-full max-w-xs">
               <h3 className="text-md text-center text-slate-600 font-bold">📄 Applications</h3>
               <p className="text-2xl font-bold text-center text-purple-700">{profileData.appliedJobs.length}</p>
@@ -131,12 +126,16 @@ const FreelancerDashboard = () => {
               <h3 className="text-md text-center text-slate-600 font-bold">👥 Clients</h3>
               <p className="text-2xl font-bold text-center text-blue-700">{profileData.clients.length}</p>
             </div>
+            <div className="p-6 hover:shadow-lg bg-white rounded-lg shadow-md w-full max-w-xs">
+      <h3 className="text-md text-center text-slate-600 font-bold">💰💰 Icoome</h3>
+      <p className="text-2xl font-bold text-center text-blue-700">{profileData.clients.length}</p>
+    </div>
           </div>
 
           {/* Render the appropriate component based on active tab */}
           {activeTab === 'applicationsList' && <ApplicationsList applications={profileData.appliedJobs} />}
           {activeTab === 'profile' && <ProfileForm profileData={profileData} onProfileChange={handleProfileChange} />}
-          {/* Add more components for income management if needed */}
+          {activeTab === 'clients' && <ClientsList clients={profileData.clients} />}
         </main>
         <ToastContainer />
       </div>

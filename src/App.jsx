@@ -11,12 +11,12 @@ import Login from '../src/pages/login'; // Import the Login component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Joblist component
 import JobDetail from '../src/pages/jobDetail.jsx'; // Import the JobDetail component
 import Clientdashboard from '../src/pages/clientdashboard.jsx'; // Import the Clientdashboard component
-import FreelancerDashboard from '../src/pages/freelancer.jsx'; // Import the Clientdashboard component
+import FreelancerDashboard from '../src/pages/freelancer.jsx'; // Import the FreelancerDashboard component
 
 const App = () => {
     return (
         <Router>
-            {window.location.pathname !== '/clientdashboard' && <Navbar />} {/* Render Navbar except on Clientdashboard */}
+            {window.location.pathname !== '/clientdashboard' && window.location.pathname !== '/freelacer' && <Navbar />} {/* Render Navbar except on Clientdashboard and FreelancerDashboard */}
             <Routes>
                 <Route path="/" element={<MyPage />} />
                 <Route path="/post-job" element={<div>Post Job Page</div>} />
@@ -32,8 +32,7 @@ const App = () => {
                 <Route path="/jobDetail/:jobId" element={<JobDetail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-            {window.location.pathname !== '/clientdashboard' && <Footer />} {/* Render Footer except on Clientdashboard */}
-            {window.location.pathname !== '/freelacer' && <Footer />} {/* Render Footer except on Clientdashboard */}
+            {window.location.pathname !== '/clientdashboard' && window.location.pathname !== '/freelacer' && <Footer />} {/* Render Footer except on Clientdashboard and FreelancerDashboard */}
         </Router>
     );
 };
