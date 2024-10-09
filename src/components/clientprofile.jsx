@@ -56,8 +56,8 @@ const ClientProfileForm = () => {
     };
 
     return (
-        <div className="flex items-center mt-[33%] justify-center h-screen bg-slate-100 p-4">
-            <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg relative">
+        <div className="flex items-center mt-[33%] justify-center w-full h-screen bg-slate-100 p-4">
+            <div className="w-[79%]  bg-white p-8 rounded-lg shadow-lg relative">
                 {/* Profile Image */}
                 <div className="flex justify-center mb-6">
                     <img
@@ -66,10 +66,10 @@ const ClientProfileForm = () => {
                         className="w-24 h-24 rounded-full shadow-md border-2 border-indigo-500 object-cover"
                     />
                 </div>
-
-                <h1 className="text-3xl font-bold text-center mb-6">
+                <h1 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
                     {isEditing ? 'Edit Client Profile' : 'Client Profile'}
                 </h1>
+
 
                 <form onSubmit={handleSubmit}>
                     {/* Form Fields */}
@@ -92,48 +92,49 @@ const ClientProfileForm = () => {
                                 onChange={handleChange}
                                 required
                                 disabled={!isEditing} // Disable input if not editing
-                                className="w-full p-3 border border-gray-300 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                className=" p-3 border border-gray-300 rounded-lg shadow-inner w-[80%] focus:outline-none focus:ring-2 focus:ring-indigo-400"
                             />
                         </div>
                     ))}
                     <div className="mb-4">
-                        <label className="block text-lg font-semibold text-indigo-600 mb-1">Project Description</label>
+                        <label className="block text-lg font-semibold my-6 text-indigo-600 mb-1">Project Description</label>
                         <textarea
                             name="projectDescription"
                             value={formData.projectDescription}
                             onChange={handleChange}
                             required
                             disabled={!isEditing}
-                            className="w-full p-3 border border-gray-300 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            className=" p-3 border border-gray-300 resize-none h-40 rounded-lg shadow-inner focus:outline-none focus:ring-2 w-[80%] focus:ring-indigo-400"
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-lg font-semibold text-indigo-600 mb-1">Upload Profile Image</label>
+                        <label className="block text-lg font-semibold my-6 text-indigo-600 mb-1">Upload Profile Image</label>
                         <input
                             type="file"
                             name="profileImage"
                             accept="image/*"
                             onChange={handleChange}
                             disabled={!isEditing}
-                            className="border border-gray-300 rounded p-2 shadow-inner w-full"
+                            className="border border-gray-300 rounded p-2 shadow-inner w-[80%]"
                         />
                     </div>
                     {/* Submit and Edit Buttons */}
                     <div className="flex justify-between mb-4">
-                        <button
-                            type="submit"
-                            className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-500 mr-2 shadow-md"
-                        >
-                            {loading ? 'Loading...' : 'Save Profile'}
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleEditToggle}
-                            className={`w-full py-2 rounded-lg ${isEditing ? 'bg-red-600' : 'bg-green-600'} text-white hover:${isEditing ? 'bg-red-500' : 'bg-green-500'} ml-2 shadow-md`}
-                        >
-                            {isEditing ? 'Cancel Edit' : 'Edit Profile'}
-                        </button>
-                    </div>
+                    <button
+                        type="submit"
+                        className="w-full border border-indigo-600 text-indigo-600 py-2 rounded-full hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-200"
+                    >
+                        {loading ? 'Loading...' : 'Save Profile'}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleEditToggle}
+                        className={`w-full border border-${isEditing ? 'red' : 'green'}-600 text-${isEditing ? 'red' : 'green'}-600 py-2 rounded-full hover:bg-${isEditing ? 'red' : 'green'}-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-${isEditing ? 'red' : 'green'}-500 focus:ring-opacity-50 transition duration-200 ml-2`}
+                    >
+                        {isEditing ? 'Cancel Edit' : 'Edit Profile'}
+                    </button>
+                </div>
+
                 </form>
                 <ToastContainer />
             </div>

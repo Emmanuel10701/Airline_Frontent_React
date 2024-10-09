@@ -8,6 +8,8 @@ import AccountSelection from './components/account'; // Import the AccountSelect
 import Contact from '../src/pages/contact'; // Import the Contact component
 import Register from '../src/pages/register'; // Import the Register component
 import Login from '../src/pages/login'; // Import the Login component
+import Reset from '../src/pages/forgot.jsx'; // Import the Login component
+import Forgot from '../src/pages/reset.jsx'; // Import the Login component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Joblist component
 import JobDetail from '../src/pages/jobDetail.jsx'; // Import the JobDetail component
 import Clientdashboard from '../src/pages/clientdashboard.jsx'; // Import the Clientdashboard component
@@ -25,6 +27,8 @@ const App = () => {
                 <Route path="/about" element={<div>About Page</div>} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/reset-password" element={<Reset />} />
+                <Route path="/forgot-password" element={<Forgot />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/jobslist" element={<Joblist />} />
                 <Route path="/clientdashboard" element={<Clientdashboard />} />

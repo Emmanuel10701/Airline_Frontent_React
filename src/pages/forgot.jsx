@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom'; // Assuming you're using React Router for navigation
-import Image from 'react-bootstrap/Image'; // Assuming you're using react-bootstrap for images
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -51,12 +50,11 @@ const ForgotPasswordPage = () => {
       <div className="fixed top-0 left-0 mb-10 w-full bg-white border-b border-blue-300 py-4 z-50 flex items-center justify-between shadow-md">
         <div className="container mx-auto flex items-center px-4 md:px-8">
           <div className="w-44 cursor-pointer flex items-center">
-            <Image src="/assets/assets_frontend/logo.svg" alt="Logo" width={176} height={50} />
             <span className="ml-3 bg-white rounded-full text-blue-600 px-4 py-1 shadow-md">Forgot</span>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center min-h-screen p-4 bg-slate-100">
+      <div className="flex items-center md:m-10 justify-center min-h-screen p-4 bg-slate-100">
         <form onSubmit={handleSubmit} className="max-w-lg w-full bg-white p-10 rounded-2xl shadow-lg">
           <h2 className="text-4xl mt-10 text-slate-700 font-extrabold mb-6 text-center">🔓 Forgot Password</h2>
           <input

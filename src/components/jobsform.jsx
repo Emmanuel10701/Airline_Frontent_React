@@ -235,7 +235,7 @@ const JobPostingForm = () => {
                                 required
                                 value={formData.description}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                className="mt-2 block w-full resize-none h-40  rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                                 rows={3}
                             />
                         </div>
@@ -250,7 +250,7 @@ const JobPostingForm = () => {
                                 required
                                 value={formData.requirements}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                className="mt-2 block w-full rounded-lg resize-none h-40  border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                                 rows={3}
                             />
                         </div>
@@ -301,7 +301,7 @@ const JobPostingForm = () => {
                                 required
                                 value={formData.work_details}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                className="mt-2 block w-full resize-none h-40  rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                                 rows={3}
                             />
                         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { FaMoneyBillWave, FaBriefcase } from 'react-icons/fa'; // Importing react-icons
+import { FaMoneyBillWave } from 'react-icons/fa'; // Importing react-icons
 import img1 from '../assets/image1.jpg';
 import img2 from '../assets/image2.jpeg';
 import img3 from '../assets/image3.jpeg';
@@ -29,28 +29,26 @@ const Carousel = () => {
     };
 
     const slides = [
-        { img: img1, text: "Remote Software Engineer", salary: "$80,000 - $120,000", location: "Anywhere" },
-        { img: img2, text: "Product Manager", salary: "$90,000 - $130,000", location: "Remote" },
-        { img: img3, text: "Data Scientist", salary: "$100,000 - $150,000", location: "Worldwide" },
-        { img: img4, text: "UI/UX Designer", salary: "$70,000 - $110,000", location: "Flexible" },
+        { img: img1, text: "Remote Software Engineer" },
+        { img: img2, text: "Product Manager" },
+        { img: img3, text: "Data Scientist" },
+        { img: img4, text: "UI/UX Designer" },
     ];
 
     return (
-        <div className="relative md:w-[76%] w-full  mx-auto mt-20 rounded-md overflow-hidden"> {/* Full width and rounded corners */}
+        <div className="relative w-full md:w-[76%] mx-auto mt-20 rounded-md overflow-hidden">
             <Slider {...settings}>
                 {slides.map((slide, index) => (
                     <div key={index} className="relative">
                         <img
                             src={slide.img}
                             alt={`Job ${index + 1}`}
-                            className="w-full h-72 object-cover rounded-md" // Rounded corners for images
+                            className="w-full h-72 object-cover rounded-md"
                         />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-lg font-bold bg-black bg-opacity-50 p-4">
-                            <h3>{slide.text}</h3>
-                            <div className="flex items-center mt-2">
-                                <span className="mr-2">{slide.salary} <FaMoneyBillWave /></span>
-                                <span>{slide.location} <FaBriefcase /></span>
-                            </div>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-50 p-4">
+                            <h3 className="text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                                {slide.text}
+                            </h3>
                         </div>
                     </div>
                 ))}

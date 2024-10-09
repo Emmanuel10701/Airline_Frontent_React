@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'; // Update for React Router
+import { Navigate } from 'react-router-dom'; // Update for React Router
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CircularProgress from '@mui/material/CircularProgress';
-import Image from 'react-bootstrap/Image'; // Assuming you're using react-bootstrap
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const ResetPasswordPage = () => {
@@ -59,13 +58,12 @@ const ResetPasswordPage = () => {
       <div className="fixed top-0 left-0 mb-10 w-full bg-white border-b border-blue-300 py-4 z-50 flex items-center justify-between shadow-md">
         <div className="container mx-auto flex items-center px-4 md:px-8">
           <div className="w-44 cursor-pointer flex items-center">
-            <Image src="/assets/assets_frontend/logo.svg" alt="Logo" width={176} height={50} />
             <span className="ml-3 bg-white rounded-full text-blue-600 px-6 py-2 shadow-md">Reset</span>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-        <form onSubmit={handleSubmit} className="max-w-md w-full bg-white p-10 rounded-xl shadow-lg">
+      <div className="flex items-center md:m-10 justify-center min-h-screen bg-gray-100 p-4">
+        <form onSubmit={handleSubmit} className="max-w-md  w-full bg-white p-10 rounded-xl shadow-lg">
           <h2 className="text-4xl mt-10 text-slate-700 font-extrabold mb-6 text-center">🛅 Reset Password</h2>
 
           <div className="relative mb-4">

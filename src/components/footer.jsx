@@ -58,10 +58,10 @@ const Footer = () => {
           <h4 className="text-lg font-bold mb-2">Subscribe to our Newsletter</h4>
           <p className="text-sm text-gray-400 mb-4">Stay updated with the latest job postings and career advice</p>
 
-          <form onSubmit={handleSubscription} className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-2">
+          <form onSubmit={handleSubscription} className="flex  sm:flex-row justify-center items-center gap-3 space-y-2 sm:space-y-0 sm:space-x-2">
             <input
               type="email"
-              className="px-4 py-3 w-full  md:w-1/3 text-gray-900 rounded-lg focus:outline-none"
+              className="px-4 py-3 w-2/3  md:w-1/3 text-gray-900 rounded-lg focus:outline-none"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -69,7 +69,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="flex items-center justify-center px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition duration-300 w-full sm:w-auto"
+              className="flex items-center w-1/4 justify-center px-4  text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition duration-300 py-3 sm:w-auto"
               disabled={loading}
             >
               {loading ? (

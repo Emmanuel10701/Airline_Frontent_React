@@ -176,29 +176,32 @@ const MyPage = () => {
             </motion.div>
 
             {/* Statistics Section */}
-            <section className="py-8 bg-slate-100 flex mt-8 ml-10 mb-6">
-              <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">Our Statistics</h2>
-                <div className="flex mr-10 flex-1 flex-wrap">
-                  <div className="p-3 bg-white shadow-sm rounded-lg text-center">
-                    <h3 className="text-2xl font-bold text-purple-600">100k</h3>
-                    <p className="text-slate-700 font-bold">Clients</p>
-                  </div>
-                  <div className="p-3 bg-white shadow-sm rounded-lg text-center">
-                    <h3 className="text-2xl font-bold text-green-600">$50M+</h3>
-                    <p className="text-slate-700 font-bold">Transactions</p>
-                  </div>
-                  <div className="p-3 bg-white shadow-sm rounded-lg text-center">
-                    <h3 className="text-2xl font-bold text-blue-600">200k</h3>
-                    <p className="text-slate-700 font-bold">Freelancers</p>
-                  </div>
-                  <div className="p-3 bg-white shadow-sm rounded-lg text-center">
-                    <h3 className="text-2xl font-bold text-red-600">150k</h3>
-                    <p className="text-slate-700 font-bold">Jobs Posted</p>
-                  </div>
+          <section className="py-8 bg-slate-100 flex flex-col items-center mt-8 ml-10 mb-6">
+            <div className="max-w-7xl mx-auto w-full">
+              <h2 className="text-3xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+                Our Statistics
+              </h2>
+              <div className="flex flex-wrap justify-center">
+                <div className="flex-1 p-3 max-w-xs m-2 bg-white shadow-sm rounded-lg text-center">
+                  <h3 className="text-3xl font-bold text-purple-600">100k</h3>
+                  <p className="text-slate-700 font-bold">Clients</p>
+                </div>
+                <div className="flex-1 p-3 max-w-xs m-2 bg-white shadow-sm rounded-lg text-center">
+                  <h3 className="text-3xl font-bold text-green-600">$50M+</h3>
+                  <p className="text-slate-700 font-bold">Transactions</p>
+                </div>
+                <div className="flex-1 p-3 max-w-xs m-2 bg-white shadow-sm rounded-lg text-center">
+                  <h3 className="text-3xl font-bold text-blue-600">200k</h3>
+                  <p className="text-slate-700 font-bold">Freelancers</p>
+                </div>
+                <div className="flex-1 p-3 max-w-xs m-2 bg-white shadow-sm rounded-lg text-center">
+                  <h3 className="text-3xl font-bold text-red-600">150k</h3>
+                  <p className="text-slate-700 font-bold">Jobs Posted</p>
                 </div>
               </div>
-            </section>
+            </div>
+          </section>
+
           </div>
 
           <div className="md:w-1/2">
