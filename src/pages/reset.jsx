@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom'; // Update for React Router
+import { useNavigate } from 'react-router-dom'; // Update for React Router
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const ResetPasswordPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate(); // Use useNavigate
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Extract uidb64 and token from the URL
+  const uidb64 = new URLSearchParams(window.location.search).get('uidb64');
   const token = new URLSearchParams(window.location.search).get('token');
 
   const handleSubmit = async (e) => {
@@ -29,19 +32,19 @@ const ResetPasswordPage = () => {
         return;
       }
 
-      const response = await fetch('/api/reset', {
+      const response = await fetch(`http://127.0.0.1:8000/api/auth/reset-password-confirm/${uidb64}/${token}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token, newPassword }),
+        body: JSON.stringify({ new_password: newPassword }), // Updated to match backend
       });
 
       const result = await response.json();
 
       if (response.ok) {
         toast.success(result.message);
-        history.push('/login');
+        navigate('/login'); // Use navigate to redirect
       } else {
         toast.error(result.message);
       }
@@ -63,7 +66,7 @@ const ResetPasswordPage = () => {
         </div>
       </div>
       <div className="flex items-center md:m-10 justify-center min-h-screen bg-gray-100 p-4">
-        <form onSubmit={handleSubmit} className="max-w-md  w-full bg-white p-10 rounded-xl shadow-lg">
+        <form onSubmit={handleSubmit} className="max-w-md w-full bg-white p-10 rounded-xl shadow-lg">
           <h2 className="text-4xl mt-10 text-slate-700 font-extrabold mb-6 text-center">🛅 Reset Password</h2>
 
           <div className="relative mb-4">

@@ -8,8 +8,8 @@ import AccountSelection from './components/account'; // Import the AccountSelect
 import Contact from '../src/pages/contact'; // Import the Contact component
 import Register from '../src/pages/register'; // Import the Register component
 import Login from '../src/pages/login'; // Import the Login component
-import Reset from '../src/pages/forgot.jsx'; // Import the Login component
-import Forgot from '../src/pages/reset.jsx'; // Import the Login component
+import Reset from '../src/pages/reset.jsx'; // Import the Login component
+import Forgot from '../src/pages/forgot.jsx'; // Import the Login component
 import Joblist from '../src/pages/jobaspage.jsx'; // Import the Joblist component
 import JobDetail from '../src/pages/jobDetail.jsx'; // Import the JobDetail component
 import Clientdashboard from '../src/pages/clientdashboard.jsx'; // Import the Clientdashboard component
