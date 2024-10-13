@@ -208,6 +208,7 @@ const JobApplicantForm = () => {
                         />
                     </div>
                     <button
+                    onClick={handleSubmit}
                         type="submit"
                         className="w-40 mx-auto bg-transparent border border-green-600 text-green-600 font-semibold py-2 rounded-full hover:bg-green-600 hover:text-white shadow transition"
                     >
