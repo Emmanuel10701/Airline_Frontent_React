@@ -1,24 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MyPage from '../src/components/homepage'; // Your existing component
-import Navbar from '../src/components/navbar'; // Import the Navbar
-import Footer from './components/footer.jsx'; // Import the Footer
-import NotFound from '../src/NotFound'; // Import the NotFound component
-import AccountSelection from './components/account'; // Import the AccountSelection component
-import Contact from '../src/pages/contact'; // Import the Contact component
-import Register from '../src/pages/register'; // Import the Register component
-import Login from '../src/pages/login'; // Import the Login component
-import Reset from '../src/pages/reset.jsx'; // Import the Login component
-import Forgot from '../src/pages/forgot.jsx'; // Import the Login component
-import Joblist from '../src/pages/jobaspage.jsx'; // Import the Joblist component
-import JobDetail from '../src/pages/jobDetail.jsx'; // Import the JobDetail component
-import Clientdashboard from '../src/pages/clientdashboard.jsx'; // Import the Clientdashboard component
-import FreelancerDashboard from '../src/pages/freelancer.jsx'; // Import the FreelancerDashboard component
+import MyPage from '../src/components/homepage';
+import Navbar from '../src/components/navbar';
+import Footer from './components/footer.jsx';
+import NotFound from '../src/NotFound';
+import AccountSelection from './components/account';
+import Contact from '../src/pages/contact';
+import Register from '../src/pages/register';
+import Login from '../src/pages/login';
+import Reset from '../src/pages/reset.jsx'; // Reset Password component
+import Forgot from '../src/pages/forgot.jsx';
+import Joblist from '../src/pages/jobaspage.jsx';
+import JobDetail from '../src/pages/jobDetail.jsx';
+import ClientDashboard from '../src/pages/clientdashboard.jsx';
+import FreelancerDashboard from '../src/pages/freelancer.jsx';
 
 const App = () => {
+    const currentPath = window.location.pathname;
+
     return (
         <Router>
-            {window.location.pathname !== '/clientdashboard' && window.location.pathname !== '/freelacer' && <Navbar />} {/* Render Navbar except on Clientdashboard and FreelancerDashboard */}
+            {/* Conditionally render Navbar and Footer */}
+            {currentPath !== '/clientdashboard' && currentPath !== '/freelancer' && <Navbar />}
             <Routes>
                 <Route path="/" element={<MyPage />} />
                 <Route path="/post-job" element={<div>Post Job Page</div>} />
@@ -26,16 +29,16 @@ const App = () => {
                 <Route path="/find-job" element={<div>Find Job Page</div>} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/reset-password" element={<Reset />} />
+                <Route path="/reset-password/:uidb64/:token" element={<Reset />} />
                 <Route path="/forgot-password" element={<Forgot />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/jobslist" element={<Joblist />} />
-                <Route path="/clientdashboard" element={<Clientdashboard />} />
-                <Route path="/freelacer" element={<FreelancerDashboard />} />
+                <Route path="/clientdashboard" element={<ClientDashboard />} />
+                <Route path="/freelancer" element={<FreelancerDashboard />} />
                 <Route path="/jobDetail/:jobId" element={<JobDetail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-            {window.location.pathname !== '/clientdashboard' && window.location.pathname !== '/freelacer' && <Footer />} {/* Render Footer except on Clientdashboard and FreelancerDashboard */}
+            {currentPath !== '/clientdashboard' && currentPath !== '/freelancer' && <Footer />}
         </Router>
     );
 };
