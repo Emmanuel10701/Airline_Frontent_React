@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { CircularProgress } from '@mui/material';
+
+const Alert = ({ type, message, onClose }) => {
+    useEffect(() => {
+        const timer = setTimeout(onClose, 4000); // Auto-close alert after 4 seconds
+        return () => clearTimeout(timer); // Clean up the timer
+    }, [onClose]);
+
+    return (
+        <div
+            className={`fixed top-4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg text-white max-w-lg z-50 transition-opacity duration-300 ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            }`}
+        >
+            <div className="flex justify-between items-center">
+                <span>{message}</span>
+                <button onClick={onClose} className="ml-4">
+                    &times;
+                </button>
+            </div>
+        </div>
+    );
+};
 
 const Login = () => {
     const [formData, setFormData] = useState({ username: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [alert, setAlert] = useState({ show: false, type: '', message: '' });
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -30,23 +51,19 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const { access, refresh, role } = await response.json(); // Assuming the role is included in the response
+                const { access, refresh, role } = await response.json();
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
-                toast.success("Login successful!");
+                setAlert({ show: true, type: 'success', message: "Login successful!" });
 
-                // Navigate based on user role
-                if (role === 'freelancer') {
-                    navigate('/freelancer'); // Redirect to freelancer dashboard
-                } else if (role === 'client') {
-                    navigate('/client-dashboard'); // Redirect to client dashboard
-                }
+                navigate('/jobslist');
+                // Small delay before redirecting
             } else {
                 const errorData = await response.json();
-                toast.error(errorData.detail || "Login failed. Please check your credentials.");
+                setAlert({ show: true, type: 'error', message: errorData.detail || "Login failed. Please check your credentials." });
             }
         } catch (error) {
-            toast.error("An error occurred. Please try again.");
+            setAlert({ show: true, type: 'error', message: "An error occurred. Please try again." });
             console.error(error);
         } finally {
             setLoading(false);
@@ -54,13 +71,20 @@ const Login = () => {
     };
 
     const handleForgotPassword = () => {
-        navigate('/forgot-password'); // Redirect to the forgot password page
+        navigate('/forgot-password');
     };
 
     return (
         <div className="relative bg-slate-100 min-h-screen flex items-center justify-center">
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md bg-white rounded-lg shadow-lg p-6 backdrop-blur-lg">
+                    {alert.show && (
+                        <Alert
+                            type={alert.type}
+                            message={alert.message}
+                            onClose={() => setAlert({ show: false, type: '', message: '' })}
+                        />
+                    )}
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="sm:mx-auto sm:w-full sm:max-w-md">
                             <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 mb-6">
@@ -131,7 +155,6 @@ const Login = () => {
                     </p>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 };
