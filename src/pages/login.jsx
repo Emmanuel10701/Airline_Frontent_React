@@ -5,21 +5,15 @@ import { CircularProgress } from '@mui/material';
 
 const Alert = ({ type, message, onClose }) => {
     useEffect(() => {
-        const timer = setTimeout(onClose, 4000); // Auto-close alert after 4 seconds
-        return () => clearTimeout(timer); // Clean up the timer
+        const timer = setTimeout(onClose, 4000);
+        return () => clearTimeout(timer);
     }, [onClose]);
 
     return (
-        <div
-            className={`fixed top-4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg text-white max-w-lg z-50 transition-opacity duration-300 ${
-                type === 'success' ? 'bg-green-500' : 'bg-red-500'
-            }`}
-        >
+        <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg text-white max-w-lg z-50 transition-opacity duration-300 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`}>
             <div className="flex justify-between items-center">
                 <span>{message}</span>
-                <button onClick={onClose} className="ml-4">
-                    &times;
-                </button>
+                <button onClick={onClose} className="ml-4">&times;</button>
             </div>
         </div>
     );
@@ -51,13 +45,15 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const { access, refresh, role } = await response.json();
+                const { access, refresh } = await response.json();
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
                 setAlert({ show: true, type: 'success', message: "Login successful!" });
 
-                navigate('/jobslist');
                 // Small delay before redirecting
+                setTimeout(() => {
+                    navigate('/jobslist');
+                }, 1000);
             } else {
                 const errorData = await response.json();
                 setAlert({ show: true, type: 'error', message: errorData.detail || "Login failed. Please check your credentials." });
@@ -87,15 +83,11 @@ const Login = () => {
                     )}
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                            <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 mb-6">
-                                Login
-                            </h1>
+                            <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-gray-900 mb-6">Login</h1>
                         </div>
 
                         <div>
-                            <label htmlFor="username" className="block text-lg font-bold leading-6 text-gray-900">
-                                Username
-                            </label>
+                            <label htmlFor="username" className="block text-lg font-bold leading-6 text-gray-900">Username</label>
                             <input
                                 id="username"
                                 name="username"
@@ -108,9 +100,7 @@ const Login = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-lg font-bold leading-6 text-gray-900">
-                                Password
-                            </label>
+                            <label htmlFor="password" className="block text-lg font-bold leading-6 text-gray-900">Password</label>
                             <div className="mt-2 relative">
                                 <input
                                     id="password"
@@ -149,9 +139,7 @@ const Login = () => {
 
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Don't have an account?{' '}
-                        <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                            Sign up
-                        </a>
+                        <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign up</a>
                     </p>
                 </div>
             </div>

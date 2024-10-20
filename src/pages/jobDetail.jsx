@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import jobs from '../components/jobs'; // Assuming this is an array of job objects
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ToastContainer, toast } from 'react-toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const JobDetails = () => {
     const { jobId } = useParams();
@@ -18,26 +19,45 @@ const JobDetails = () => {
     const [loading, setLoading] = useState(false);
 
     const showAlert = (message, type) => {
-        toast[type](message);
+        toast[type](message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            pauseOnFocusLoss: true,
+        });
+    };
+
+    // Log the user details
+    const logUserDetails = () => {
+        const userDetails = JSON.parse(localStorage.getItem('userDetails')); // Assuming user details are stored here
+        console.log('Logged in user:', userDetails);
+        console.log("no details")
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        
+
         const formData = new FormData();
-        formData.append('user', 1); // Static user ID
-        formData.append('job', 1); // Static job ID
         formData.append('applicant_name', applicantName);
         formData.append('applicant_email', applicantEmail);
         formData.append('cover_letter', coverLetter);
         formData.append('proposal', proposal);
         formData.append('company_name', job.companyName || 'Default Company'); // Default company name
 
+        const accessToken = localStorage.getItem('accessToken'); // Retrieve token
+
+        // Log user details when submitting application
+        logUserDetails();
+
         try {
             await axios.post('http://127.0.0.1:8000/api/applications/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${accessToken}`, // Include token in headers
                 },
             });
             showAlert('Application submitted successfully!', 'success');
@@ -47,8 +67,11 @@ const JobDetails = () => {
             showAlert('Error submitting application. Please try again.', 'error');
         } finally {
             setLoading(false);
+        const userDetails = JSON.parse(localStorage.getItem('userDetails')); // Assuming user details are stored here
+        console.log('Logged in user:', userDetails);
+        console.log("no details")
         }
-    };
+    }; 
 
     const handleCancel = () => {
         setApplicantName('');
@@ -69,7 +92,7 @@ const JobDetails = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-6 bg-gray-100 min-h-screen">
-            <ToastContainer />
+            <ToastContainer /> {/* ToastContainer for notifications */}
 
             <div className="max-w-4xl w-full mx-auto p-4">
                 <img 

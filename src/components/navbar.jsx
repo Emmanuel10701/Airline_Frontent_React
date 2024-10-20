@@ -45,16 +45,16 @@ const Navbar = () => {
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
         <ul
-          className={`md:flex space-x-4 absolute md:static bg-gray-100 md:bg-transparent transition-transform duration-300 ${
-            isOpen ? 'top-12 left-0 w-full' : '-top-40'
-          }`}
+          className={`md:flex absolute md:static bg-gray-100 md:bg-transparent transition-all duration-300 ${
+            isOpen ? 'top-12 left-0 w-full' : 'hidden'
+          } flex flex-col items-center md:flex-row md:space-x-4 space-y-5 md:space-y-0`}
         >
           {navItems.map((item) => (
             <li key={item.name}>
               <Link
                 to={item.path}
-                className={`block py-2 px-4 transition duration-300 relative ${
-                  location.pathname === item.path ? 'text-blue-500 font-bold' : 'text-gray-800 hover:text-blue-500'
+                className={`block py-2 px-4 transition duration-300 relative font-bold ${
+                  location.pathname === item.path ? 'text-blue-500' : 'text-gray-800 hover:text-blue-500'
                 }`}
                 onClick={closeMenu}
               >

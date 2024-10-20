@@ -317,6 +317,8 @@ const JobPostingForm = () => {
                     Cancel
                 </button>
                 <button
+         onClick={handleSubmit}
+
                     type="submit"
                     className={`flex-1 py-2 w-1/2 px-3 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition ${loading && 'opacity-50 cursor-not-allowed'}`}
                     disabled={loading}
