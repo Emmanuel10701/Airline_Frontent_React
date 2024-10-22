@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import jobs from '../components/jobs'; // Assuming this is an array of job objects
 import axios from 'axios';
@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const JobDetails = () => {
     const { jobId } = useParams();
     const navigate = useNavigate();
-    const job = jobs.find(job => job.id === Number(jobId)) || { id: 1 }; // Default to job ID 1 if not found
+    const job = jobs.find(job => job.id === Number(jobId)) || jobs.find(job => job.id === 1); // Default to job ID 1 if not found
 
     const [applicantName, setApplicantName] = useState('');
     const [applicantEmail, setApplicantEmail] = useState('');
@@ -30,34 +30,38 @@ const JobDetails = () => {
         });
     };
 
-    // Log the user details
-    const logUserDetails = () => {
-        const userDetails = JSON.parse(localStorage.getItem('userDetails')); // Assuming user details are stored here
-        console.log('Logged in user:', userDetails);
-        console.log("no details")
-    };
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            showAlert('Please log in first.', 'error');
+            navigate('/login'); // Redirect to login page
+            return;
+        }
+
+        // Set default name and email here if necessary
+        setApplicantName('Default Name'); // Or any other default value
+        setApplicantEmail('default@example.com'); // Or any other default value
+    }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
+    
         const formData = new FormData();
         formData.append('applicant_name', applicantName);
         formData.append('applicant_email', applicantEmail);
         formData.append('cover_letter', coverLetter);
         formData.append('proposal', proposal);
-        formData.append('company_name', job.companyName || 'Default Company'); // Default company name
-
-        const accessToken = localStorage.getItem('accessToken'); // Retrieve token
-
-        // Log user details when submitting application
-        logUserDetails();
-
+        formData.append('job', 1); // Hard-coded job ID to 1
+        formData.append('company_name', job.companyName || 'Default Company');
+    
+        const accessToken = localStorage.getItem('accessToken');
+    
         try {
             await axios.post('http://127.0.0.1:8000/api/applications/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${accessToken}`, // Include token in headers
+                    'Authorization': `Bearer ${accessToken}`,
                 },
             });
             showAlert('Application submitted successfully!', 'success');
@@ -67,15 +71,11 @@ const JobDetails = () => {
             showAlert('Error submitting application. Please try again.', 'error');
         } finally {
             setLoading(false);
-        const userDetails = JSON.parse(localStorage.getItem('userDetails')); // Assuming user details are stored here
-        console.log('Logged in user:', userDetails);
-        console.log("no details")
         }
-    }; 
+    };
+    
 
     const handleCancel = () => {
-        setApplicantName('');
-        setApplicantEmail('');
         setCoverLetter(null);
         setCoverLetterFileName('');
         setProposal('');
@@ -92,7 +92,7 @@ const JobDetails = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-6 bg-gray-100 min-h-screen">
-            <ToastContainer /> {/* ToastContainer for notifications */}
+            <ToastContainer />
 
             <div className="max-w-4xl w-full mx-auto p-4">
                 <img 
@@ -147,17 +147,13 @@ const JobDetails = () => {
                         type="text" 
                         placeholder="Your Name" 
                         value={applicantName} 
-                        onChange={(e) => setApplicantName(e.target.value)} 
-                        className="border border-gray-300 w-2/3 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm hover:shadow-md transition-shadow duration-200"
-                        required
+                        className="border border-gray-300 w-2/3 rounded-lg p-3 mb-4 bg-gray-200 cursor-not-allowed"
                     />
                     <input 
                         type="email" 
                         placeholder="Your Email" 
                         value={applicantEmail} 
-                        onChange={(e) => setApplicantEmail(e.target.value)} 
-                        className="border border-gray-300 rounded-lg p-3 w-2/3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm hover:shadow-md transition-shadow duration-200"
-                        required
+                        className="border border-gray-300 rounded-lg p-3 w-2/3 mb-4 bg-gray-200 cursor-not-allowed"
                     />
                     <label className="flex items-center mb-4">
                         <span className="text-blue-500">📁</span>
@@ -190,7 +186,7 @@ const JobDetails = () => {
                         <button 
                             type="button" 
                             onClick={handleCancel} 
-                            className="flex-1 ml-4 bg-transparent text-red-500 font-bold py-2 px-3 rounded-full border border-red-500 shadow-lg hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 active:bg-red-600 transition duration-200 hover:shadow-xl"
+                            className="flex-1 bg-red-500 text-white font-bold py-2 px-3 rounded-full border border-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 active:bg-red-700 transition duration-200"
                         >
                             Cancel
                         </button>
@@ -200,5 +196,4 @@ const JobDetails = () => {
         </div>
     );
 };
-
 export default JobDetails;

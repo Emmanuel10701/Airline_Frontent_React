@@ -60,7 +60,7 @@ const Login = () => {
             }
         } catch (error) {
             setAlert({ show: true, type: 'error', message: "An error occurred. Please try again." });
-            console.error(error);
+            console.error("Login error:", error);
         } finally {
             setLoading(false);
         }

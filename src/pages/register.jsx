@@ -4,7 +4,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { CircularProgress } from '@mui/material';
-import backgroundImage from '../assets/assets/winter.jpg';
 import Modal from '../components/modal'; // Import the Modal component
 
 const Register = () => {
@@ -54,10 +53,9 @@ const Register = () => {
             });
 
             if (response.ok) {
-                const { token } = await response.json();
-                localStorage.setItem('jwtToken', token);
                 toast.success("Registration successful!");
                 alert("Registration successful!");
+                localStorage.removeItem('userRole'); // Remove role from local storage
                 navigate('/login');
             } else {
                 toast.error("Registration failed. Please try again.");
