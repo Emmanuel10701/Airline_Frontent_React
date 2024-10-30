@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { CircularProgress } from '@mui/material';
 import { FaEnvelope, FaPhone, FaBuilding, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -14,10 +12,10 @@ const JobPostingForm = () => {
         description: '',
         requirements: '',
         salary: '',
-        logo: null, // Keep as null for file handling
+        logo: null,
         work_type: '',
         work_details: '',
-        user: 1, // This should be set to the logged-in user's ID
+        user: 1,
     });
     const [loading, setLoading] = useState(false);
     const [logoPreview, setLogoPreview] = useState(null);
@@ -33,7 +31,7 @@ const JobPostingForm = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setLogoPreview(reader.result);
-                setFormData((prevData) => ({ ...prevData, logo: file })); // Store the file
+                setFormData((prevData) => ({ ...prevData, logo: file }));
             };
             reader.readAsDataURL(file);
         } else {
@@ -45,10 +43,9 @@ const JobPostingForm = () => {
         e.preventDefault();
         setLoading(true);
 
-        // Basic validation
         const { job_title, company_name, email, mobile, location, description, requirements, salary, work_type, work_details, logo } = formData;
         if (!job_title || !company_name || !email || !mobile || !location || !description || !requirements || !salary || !work_type || !work_details || !logo) {
-            toast.error("Please fill in all required fields.");
+            alert("Please fill in all required fields.");
             setLoading(false);
             return;
         }
@@ -65,7 +62,7 @@ const JobPostingForm = () => {
             });
 
             if (response.ok) {
-                toast.success("Job posted successfully!");
+                alert("Job posted successfully!");
                 setFormData({
                     job_title: '',
                     company_name: '',
@@ -82,10 +79,10 @@ const JobPostingForm = () => {
                 });
                 setLogoPreview(null);
             } else {
-                toast.error("Failed to post job. Please try again.");
+                alert("Failed to post job. Please try again.");
             }
         } catch (error) {
-            toast.error("An error occurred. Please try again.");
+            alert("An error occurred. Please try again.");
             console.error(error);
         } finally {
             setLoading(false);
@@ -111,11 +108,8 @@ const JobPostingForm = () => {
     };
 
     return (
-        <div
-            className="relative w-full min-h-screen bg-slate-100 flex items-center justify-center bg-cover bg-center"
-             
-        >
-            <div className="flex min-h-full w-full mt-20 mb-20 mx-4 flex-col justify-center items-center md:w-[90%]  md:mx-auto">
+        <div className="relative w-full min-h-screen bg-slate-100 flex items-center justify-center bg-cover bg-center">
+            <div className="flex min-h-full w-full mt-20 mb-20 mx-4 flex-col justify-center items-center md:w-[90%] md:mx-auto">
                 <div className="mt-10 w-full bg-white rounded-xl shadow-lg p-8 backdrop-blur-lg">
                     <h1 className="text-center text-3xl font-bold leading-9 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-6">
                         Post a Job
@@ -235,7 +229,7 @@ const JobPostingForm = () => {
                                 required
                                 value={formData.description}
                                 onChange={handleChange}
-                                className="mt-2 block w-full resize-none h-40  rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                className="mt-2 block w-full resize-none h-40 rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                                 rows={3}
                             />
                         </div>
@@ -250,7 +244,7 @@ const JobPostingForm = () => {
                                 required
                                 value={formData.requirements}
                                 onChange={handleChange}
-                                className="mt-2 block w-full rounded-lg resize-none h-40  border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                className="mt-2 block w-full rounded-lg resize-none h-40 border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                                 rows={3}
                             />
                         </div>
@@ -301,34 +295,32 @@ const JobPostingForm = () => {
                                 required
                                 value={formData.work_details}
                                 onChange={handleChange}
-                                className="mt-2 block w-full resize-none h-40  rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
+                                className="mt-2 block w-full resize-none h-40 rounded-lg border-2 border-gray-300 py-3 px-4 text-lg text-gray-900 shadow-md focus:border-indigo-600 focus:ring-indigo-600 focus:outline-none"
                                 rows={3}
                             />
                         </div>
-{/* Buttons */}
-       
-                    </form>
-          <div className="flex justify-center w-full md:w-1/2 items-center gap-4 mt-2 md:mt-6">
-                <button
-                    type="button"
-                    onClick={handleCancel}
-                    className="flex-1 py-2 px-3 w-1/2 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition"
-                >
-                    Cancel
-                </button>
-                <button
-         onClick={handleSubmit}
 
-                    type="submit"
-                    className={`flex-1 py-2 w-1/2 px-3 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition ${loading && 'opacity-50 cursor-not-allowed'}`}
-                    disabled={loading}
-                >
-                    {loading ? <CircularProgress size={24} /> : "Submit"}
-                </button>
-            </div>
+                        {/* Buttons */}
+                    </form>
+                    <div className="flex justify-center w-full md:w-1/2 items-center gap-4 mt-2 md:mt-6">
+                        <button
+                            type="button"
+                            onClick={handleCancel}
+                            className="flex-1 py-2 px-3 w-1/2 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleSubmit}
+                            type="submit"
+                            className={`flex-1 py-2 w-1/2 px-3 font-bold text-gray-900 rounded-full bg-white shadow-md hover:shadow-lg transition ${loading && 'opacity-50 cursor-not-allowed'}`}
+                            disabled={loading}
+                        >
+                            {loading ? <CircularProgress size={24} /> : "Submit"}
+                        </button>
+                    </div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 };

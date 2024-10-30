@@ -254,7 +254,6 @@ const jobs = [
         phone: "012-012-0123",
         workType: "Remote",
     },
-    // Add more job objects to reach at least 30 jobs...
 ];
 
 export default jobs;
