@@ -86,7 +86,7 @@ const ClientProfileForm = () => {
                 <CustomAlert message={alert.message} type={alert.type} onClose={closeAlert} />
 
                 <form onSubmit={handleSubmit}>
-                    {[
+                    {[ 
                         { label: 'Company Name', name: 'companyName', type: 'text' },
                         { label: 'Contact Name', name: 'contactName', type: 'text' },
                         { label: 'Email', name: 'email', type: 'email' },
