@@ -20,6 +20,21 @@ const skills = [
     "DynamoDB", "Next.js 14", "TypeScript", "SaaS", "UI/UX", "Tailwind CSS", "Bootstrap"
 ];
 
+const CustomAlert = ({ message, type, onClose }) => {
+    if (!message) return null;
+
+    const alertClass = type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+
+    return (
+        <div className={`p-4 mb-4 ${alertClass} border rounded`} role="alert">
+            <span>{message}</span>
+            <button onClick={onClose} className="ml-4 text-sm text-blue-600 hover:underline">
+                Close
+            </button>
+        </div>
+    );
+};
+
 const JobApplicantForm = () => {
     const [formData, setFormData] = useState({
         fullName: '',
@@ -32,6 +47,7 @@ const JobApplicantForm = () => {
         resume: null,
         profileImage: null,
     });
+    const [alert, setAlert] = useState({ message: '', type: '' });
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -62,22 +78,25 @@ const JobApplicantForm = () => {
             const response = await fetch("http://127.0.0.1:8000/api/freelancer/profile/", {
                 method: "POST",
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Adjust as necessary
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: formDataToSend,
             });
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Profile created:', data);
-                // Optionally, reset the form or redirect the user
+                setAlert({ message: 'Profile created successfully!', type: 'success' });
             } else {
                 const errorData = await response.json();
-                console.error('Failed to create profile:', errorData);
+                setAlert({ message: 'Failed to create profile. Please try again.', type: 'error' });
             }
         } catch (error) {
-            console.error('Error:', error);
+            setAlert({ message: 'An error occurred. Please try again.', type: 'error' });
         }
+    };
+
+    const closeAlert = () => {
+        setAlert({ message: '', type: '' });
     };
 
     return (
@@ -86,6 +105,7 @@ const JobApplicantForm = () => {
                 <h1 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center mb-4">
                     Job Applicant Profile
                 </h1>
+                <CustomAlert message={alert.message} type={alert.type} onClose={closeAlert} />
                 <div className="flex justify-center mb-4">
                     <input
                         type="file"
@@ -107,6 +127,7 @@ const JobApplicantForm = () => {
                     </label>
                 </div>
                 <form onSubmit={handleSubmit} className="w-[77%] mx-auto">
+                    {/* Form Fields */}
                     <div className="flex flex-col mb-4">
                         <label className="text-white">Full Name</label>
                         <input
@@ -208,7 +229,6 @@ const JobApplicantForm = () => {
                         />
                     </div>
                     <button
-                    onClick={handleSubmit}
                         type="submit"
                         className="w-40 mx-auto bg-transparent border border-green-600 text-green-600 font-semibold py-2 rounded-full hover:bg-green-600 hover:text-white shadow transition"
                     >
