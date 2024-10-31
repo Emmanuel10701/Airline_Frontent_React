@@ -205,17 +205,38 @@ const JobList = () => {
                 ))}
             </div>
 
-            <div className="flex justify-center mb-4">
-                {Array.from({ length: totalPages }, (_, index) => (
-                    <button 
-                        key={index + 1} 
-                        onClick={() => handlePageChange(index + 1)} 
-                        className={`border rounded px-3 py-1 mx-1 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'}`}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
-            </div>
+            <div className="flex justify-center items-center mb-4">
+    <button 
+        onClick={() => handlePageChange(currentPage > 1 ? currentPage - 1 : 1)} 
+        className="flex items-center justify-center w-10 h-10 rounded-full border border-blue-500 bg-white text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200 mx-1"
+        disabled={currentPage === 1}
+    >
+        &lt;&lt; {/* Change to your desired icon or text */}
+    </button>
+
+    {Array.from({ length: totalPages }, (_, index) => (
+        <button 
+            key={index + 1} 
+            onClick={() => handlePageChange(index + 1)} 
+            className={`flex items-center justify-center w-10 h-10 rounded-full border mx-1 transition duration-200 ${
+                currentPage === index + 1 
+                    ? 'bg-blue-500 text-white border-blue-500' 
+                    : 'bg-white text-blue-500 border-blue-300 hover:bg-blue-500 hover:text-white'
+            }`}
+        >
+            {index + 1}
+        </button>
+    ))}
+
+    <button 
+        onClick={() => handlePageChange(currentPage < totalPages ? currentPage + 1 : totalPages)} 
+        className="flex items-center justify-center w-10 h-10 rounded-full border border-blue-500 bg-white text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200 mx-1"
+        disabled={currentPage === totalPages}
+    >
+        &gt;&gt; {/* Change to your desired icon or text */}
+    </button>
+</div>
+
         </div>
     );
 };

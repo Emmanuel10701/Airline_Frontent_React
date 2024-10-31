@@ -141,11 +141,11 @@ const JobDetails = () => {
                         <span className="text-orange-600">{job.experience || 'N/A'}</span>
                     </p>
                     <p className="text-lg font-semibold text-gray-700 mb-2">
-                        <strong>Salary:</strong> 
+                        <strong>Salary: </strong> 
                         <span className="text-red-600">{job.salary || 'N/A'}</span>
                     </p>
                     <p className="text-lg text-gray-600 mb-2">
-                        <strong>Contact:</strong> 
+                        <strong>Contact: </strong> 
                         <span className="text-gray-800">📧 {job.email || 'N/A'} | 📞 {job.phone || 'N/A'}</span>
                     </p>
                 </div>
@@ -191,13 +191,13 @@ const JobDetails = () => {
                         className="border border-gray-300 resize-none h-40 rounded-lg p-3 w-2/3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm hover:shadow-md transition-shadow duration-200"
                         required
                     />
-                    <div className="flex justify-around w-full items-center mt-4">
+                    <div className="flex justify-around w-3/5 gap-3 items-center mt-4">
                         <button 
                             type="submit" 
                             className="flex-1 bg-transparent text-blue-500 font-bold py-2 px-3 rounded-full border border-blue-500 shadow-lg hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 active:bg-blue-600 transition duration-200 hover:shadow-xl"
                             disabled={loading}
                         >
-                            {loading ? <><CircularProgress size={24} color="inherit" className="mr-2" /> Submitting...</> : 'Submit Application'}
+                            {loading ? <><CircularProgress size={24} color="inherit" className="mr-2" /> Submitting...</> : 'Submit '}
                         </button>
                         <button 
                             type="button" 
