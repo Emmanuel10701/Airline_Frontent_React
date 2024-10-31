@@ -163,12 +163,12 @@ const MyPage = () => {
               animate={{ opacity: 1, scale: [1, 1.05, 1] }}
               transition={{ duration: 0.8 }}
             >
-              <Link to="/post-job">
+              <Link to="/clientdashboard">
                 <button className="px-8 py-3 font-medium text-white bg-purple-600 rounded-full hover:bg-purple-700 transition duration-300">
                   Post a Job
                 </button>
               </Link>
-              <Link to="/find-job">
+              <Link to="/jobslist">
                 <button className="px-8 py-3 font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300">
                   Find a Job
                 </button>
