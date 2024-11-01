@@ -28,8 +28,10 @@ const Navbar = () => {
     };
   }, []);
 
+  // Add the Jobs page to the navigation items
   const navItems = [
     { name: 'Home', path: '/' },
+    { name: 'Jobs', path: '/jobslist' }, // New Jobs entry
     { name: 'Login', path: '/login' },
     { name: 'Register', path: '/account-selection' },
     { name: 'Contact', path: '/contact' },

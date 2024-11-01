@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import * as jwtDecode from 'jwt-decode';
-import CustomAlert from '../components/alert'; // Import the CustomAlert component
+import CustomAlert from '../components/alert';
 
 const JobDetails = () => {
     const { jobId } = useParams();
@@ -51,7 +51,7 @@ const JobDetails = () => {
         setLoading(true);
 
         const accessToken = localStorage.getItem('accessToken');
-        const userId = jwtDecode.default(accessToken).user_id;
+        const userId = jwtDecode.default(accessToken).user_id; // Ensure user_id matches your token structure
 
         const formData = new FormData();
         formData.append('applicant_name', applicantName);
@@ -102,7 +102,7 @@ const JobDetails = () => {
         );
     }
 
-    return (
+    return (    
         <div className="flex flex-col items-center justify-center p-6 bg-gray-100 min-h-screen">
             <CustomAlert message={alertMessage} type={alertType} onClose={() => setAlertMessage('')} />
 
@@ -126,7 +126,7 @@ const JobDetails = () => {
                     </p>
                     <p className="text-lg text-gray-600 mb-2">
                         <strong>Contract Type:</strong> 
-                        <span className="text-gray-800">{job.contract_type || 'N/A'}</span>
+                        <span className="text-gray-800">{job.work_type || 'N/A'}</span>
                     </p>
                     <p className="text-lg text-gray-600 mb-4">
                         <strong>Description:</strong> 
@@ -146,7 +146,7 @@ const JobDetails = () => {
                     </p>
                     <p className="text-lg text-gray-600 mb-2">
                         <strong>Contact: </strong> 
-                        <span className="text-gray-800">📧 {job.email || 'N/A'} | 📞 {job.phone || 'N/A'}</span>
+                        <span className="text-gray-800">📧 {job.email || 'N/A'} | 📞 {job.mobile || 'N/A'}</span>
                     </p>
                 </div>
 
