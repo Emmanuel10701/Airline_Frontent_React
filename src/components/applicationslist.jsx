@@ -1,30 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ApplicationsList = () => {
-  // Dummy data
-  const applications = [
-    {
-      id: 1,
-      jobTitle: 'Frontend Developer',
-      company: 'Tech Solutions',
-      status: 'Pending',
-      dateApplied: '2024-09-21',
-    },
-    {
-      id: 2,
-      jobTitle: 'Backend Engineer',
-      company: 'InnovateX',
-      status: 'Accepted',
-      dateApplied: '2024-08-10',
-    },
-    {
-      id: 3,
-      jobTitle: 'Full Stack Developer',
-      company: 'GlobalSoft',
-      status: 'Rejected',
-      dateApplied: '2024-07-15',
-    },
-  ];
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/applications/');
+        setApplications(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchApplications();
+  }, []);
+
+  if (loading) {
+    return <p className="text-gray-500 text-center">Loading applications...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-500 text-center">Error: {error}</p>;
+  }
 
   if (applications.length === 0) {
     return <p className="text-gray-500 text-center">No applications available</p>;
@@ -44,8 +47,8 @@ const ApplicationsList = () => {
         <tbody>
           {applications.map((application) => (
             <tr key={application.id} className="border-b border-gray-200 transition-all duration-300 hover:bg-gray-100">
-              <td className="py-4 px-6 text-sm font-medium">{application.jobTitle}</td>
-              <td className="py-4 px-6 text-sm">{application.company}</td>
+              <td className="py-4 px-6 text-sm font-medium">{application.job.jobTitle}</td>
+              <td className="py-4 px-6 text-sm">{application.company_name}</td>
               <td
                 className={`py-4 px-6 font-semibold text-sm ${
                   application.status === 'Pending'
@@ -57,7 +60,7 @@ const ApplicationsList = () => {
               >
                 {application.status}
               </td>
-              <td className="py-4 px-6 text-sm text-gray-500">{application.dateApplied}</td>
+              <td className="py-4 px-6 text-sm text-gray-500">{new Date(application.created_at).toLocaleDateString()}</td>
             </tr>
           ))}
         </tbody>
