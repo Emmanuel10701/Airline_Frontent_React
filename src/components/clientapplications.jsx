@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { CircularProgress } from '@mui/material'; // Import Material-UI spinner
 
 const ApplicationsList = () => {
   const [applications, setApplications] = useState([]);
@@ -22,7 +23,13 @@ const ApplicationsList = () => {
   }, []);
 
   if (loading) {
-    return <p className="text-gray-500 text-center">Loading applications...</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        {/* Material UI Spinner */}
+        <CircularProgress />
+        <p className="text-gray-500 ml-4">Loading applications...</p>
+      </div>
+    );
   }
 
   if (error) {
