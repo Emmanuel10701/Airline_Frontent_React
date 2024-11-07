@@ -21,6 +21,18 @@ const ApplicationsList = () => {
     fetchApplications();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      // Send DELETE request to API
+      await axios.delete(`http://127.0.0.1:8000/api/applications/${id}/`);
+      
+      // Remove deleted application from the state
+      setApplications(applications.filter((application) => application.id !== id));
+    } catch (err) {
+      setError('Error deleting the application');
+    }
+  };
+
   if (loading) {
     return <p className="text-gray-500 text-center">Loading applications...</p>;
   }
@@ -42,6 +54,7 @@ const ApplicationsList = () => {
             <th className="py-3 px-6 text-left text-sm font-medium">Company</th>
             <th className="py-3 px-6 text-left text-sm font-medium">Status</th>
             <th className="py-3 px-6 text-left text-sm font-medium">Date Applied</th>
+            <th className="py-3 px-6 text-left text-sm font-medium">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -61,6 +74,14 @@ const ApplicationsList = () => {
                 {application.status}
               </td>
               <td className="py-4 px-6 text-sm text-gray-500">{new Date(application.created_at).toLocaleDateString()}</td>
+              <td className="py-4 px-6 text-sm">
+                <button
+                  onClick={() => handleDelete(application.id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
