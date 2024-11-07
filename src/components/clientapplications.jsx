@@ -22,10 +22,19 @@ const ApplicationsList = () => {
     fetchApplications();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/applications/${id}`);
+      // Filter out the deleted application from the state
+      setApplications(applications.filter(application => application.id !== id));
+    } catch (err) {
+      setError('Error deleting application');
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        {/* Material UI Spinner */}
         <CircularProgress />
         <p className="text-gray-500 ml-4">Loading applications...</p>
       </div>
@@ -33,7 +42,7 @@ const ApplicationsList = () => {
   }
 
   if (error) {
-    return <p className="text-red-500 text-center">Error: {error}</p>;
+    return <p className="text-red-500 text-center">{error}</p>;
   }
 
   if (applications.length === 0) {
@@ -49,6 +58,7 @@ const ApplicationsList = () => {
             <th className="py-3 px-6 text-left text-sm font-medium">Company</th>
             <th className="py-3 px-6 text-left text-sm font-medium">Status</th>
             <th className="py-3 px-6 text-left text-sm font-medium">Date Applied</th>
+            <th className="py-3 px-6 text-left text-sm font-medium">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +78,14 @@ const ApplicationsList = () => {
                 {application.status}
               </td>
               <td className="py-4 px-6 text-sm text-gray-500">{new Date(application.created_at).toLocaleDateString()}</td>
+              <td className="py-4 px-6 text-sm text-center">
+                <button
+                  onClick={() => handleDelete(application.id)}
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
